@@ -52,6 +52,11 @@ body::before {
 
 :lang(ko) {
   font-family: var(--font-korean);
+  word-break: keep-all;
+}
+
+:where(h1, h2, h3, p, a, button, blockquote) {
+  overflow-wrap: break-word;
 }
 
 button,

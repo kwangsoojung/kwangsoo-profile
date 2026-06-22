@@ -1,24 +1,42 @@
-const languages = ['EN', 'KO', 'FR'];
+import type { LanguageCode, LanguageOption } from '../content/types';
 
-export function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  ariaLabel: string;
+  options: LanguageOption[];
+  selectedLanguage: LanguageCode;
+  onLanguageChange: (language: LanguageCode) => void;
+};
+
+export function LanguageSwitcher({
+  ariaLabel,
+  options,
+  selectedLanguage,
+  onLanguageChange,
+}: LanguageSwitcherProps) {
   return (
     <div
-      aria-label="Language switcher placeholder"
+      aria-label={ariaLabel}
       className="inline-flex rounded-full border border-line bg-ivory-50/70 p-1 text-xs font-semibold uppercase tracking-[0.12em]"
     >
-      {languages.map((language, index) => (
-        <button
-          key={language}
-          type="button"
-          className={`rounded-full px-3 py-2 transition-colors duration-200 ${
-            index === 0
-              ? 'bg-ink-950 text-ivory-50'
-              : 'text-ink-500 hover:text-brand-700'
-          }`}
-        >
-          {language}
-        </button>
-      ))}
+      {options.map((language) => {
+        const isActive = language.code === selectedLanguage;
+
+        return (
+          <button
+            key={language.code}
+            type="button"
+            aria-pressed={isActive}
+            onClick={() => onLanguageChange(language.code)}
+            className={`rounded-full px-3 py-2 transition-colors duration-200 ${
+              isActive
+                ? 'bg-ink-950 text-ivory-50'
+                : 'text-ink-500 hover:text-brand-700'
+            }`}
+          >
+            {language.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

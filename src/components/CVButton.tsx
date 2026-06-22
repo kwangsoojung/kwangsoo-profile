@@ -1,11 +1,16 @@
 import { FileDown } from 'lucide-react';
 import { Button } from './Button';
 
-export function CVButton() {
+type CVButtonProps = {
+  href: string;
+  label: string;
+};
+
+export function CVButton({ href, label }: CVButtonProps) {
   return (
-    <Button href="/cv/" variant="secondary" aria-label="CV download placeholder">
+    <Button href={href} variant="secondary">
       <FileDown aria-hidden="true" size={17} strokeWidth={1.8} />
-      CV placeholder
+      {label}
     </Button>
   );
 }

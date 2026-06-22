@@ -1,14 +1,53 @@
-export const profile = {
+import type { ProfileContent } from './types';
+
+export const en = {
+  lang: 'en',
+  htmlLang: 'en',
   nameParts: ['JUNG', 'KWANG', 'SOO'],
+  brandName: 'Jung Kwang Soo',
   location: 'Korea ↔ France',
-  positioning: 'Product, Retail & E-commerce Operations Project Manager',
   discipline: 'Product · Retail · E-commerce Operations',
   quote:
-    'Products need more than ideas. They need structure, execution and local understanding.',
+    'Products need more than ideas. They need structure, timing, people and local understanding.',
   summary:
     'Connecting product, brand and market execution between Korea and France.',
   positioningStatement:
     'I work where product, brand and market execution meet.',
+  heroVisual: {
+    meta: 'Seoul / Paris',
+    marker: '01',
+  },
+  ui: {
+    languageSwitcherLabel: 'Language',
+    languages: [
+      { code: 'en', label: 'EN' },
+      { code: 'fr', label: 'FR' },
+      { code: 'kr', label: 'KR' },
+    ],
+    nav: {
+      profile: 'Profile',
+      work: 'Work',
+      contact: 'Contact',
+    },
+    cta: {
+      viewProfile: 'View Profile',
+      downloadCv: 'Download CV',
+    },
+    sections: {
+      positioning: 'Positioning',
+      narrative: 'Career Narrative',
+      capabilities: 'Capabilities',
+      selectedWork: 'Selected Work',
+      cv: 'CV Download',
+      contact: 'Contact',
+    },
+    caseLabel: 'Case',
+    contactLabels: {
+      email: 'Email',
+      linkedIn: 'LinkedIn',
+      location: 'Location',
+    },
+  },
   pillars: [
     {
       title: 'Product Operations',
@@ -23,6 +62,7 @@ export const profile = {
       description: 'Keeping digital stores coherent across languages and markets.',
     },
   ],
+  narrativeIntro: 'Four chapters shaped by objects, markets and momentum.',
   chapters: [
     {
       number: '01',
@@ -61,6 +101,7 @@ export const profile = {
       ],
     },
   ],
+  capabilitiesHeading: 'Practical range, held together by taste.',
   capabilities: [
     { title: 'Product Communication', note: 'clear offer logic' },
     { title: 'Retail Marketing', note: 'space, display, launch' },
@@ -69,6 +110,7 @@ export const profile = {
     { title: 'Cross-border Coordination', note: 'Korea-France rhythm' },
     { title: 'Design & Product Sense', note: 'detail with restraint' },
   ],
+  selectedWorkHeading: 'Selected work as operating scenes, not trophies.',
   selectedWork: [
     {
       title: 'Retail Display & Product Communication',
@@ -95,15 +137,19 @@ export const profile = {
         'A practical bridge between creative intent, physical constraints and delivery teams.',
     },
   ],
-  cvFiles: [
-    { label: 'Korean CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
-    { label: 'English CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
-    { label: 'French CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
-  ],
+  cv: {
+    heading: 'Download the profile in your preferred language.',
+    files: [
+      { label: 'Korean CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
+      { label: 'English CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
+      { label: 'French CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
+    ],
+  },
   contact: {
     email: 'jungkwangsoo.paris@gmail.com',
     area: 'Paris area, France',
     linkedIn: 'https://www.linkedin.com/in/jungkwangsoo/',
+    linkedInLabel: 'jungkwangsoo',
     cta: 'For product, retail, e-commerce or Korea-France coordination opportunities.',
   },
-};
+} satisfies ProfileContent;
