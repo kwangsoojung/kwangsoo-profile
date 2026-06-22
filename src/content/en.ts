@@ -17,6 +17,10 @@ export const en = {
     meta: 'Seoul / Paris',
     marker: '01',
   },
+  mapVisual: {
+    origin: 'KR',
+    destination: 'FR',
+  },
   ui: {
     languageSwitcherLabel: 'Language',
     languages: [

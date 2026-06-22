@@ -17,6 +17,10 @@ export const kr = {
     meta: '서울 / 파리',
     marker: '01',
   },
+  mapVisual: {
+    origin: 'KR',
+    destination: 'FR',
+  },
   ui: {
     languageSwitcherLabel: '언어',
     languages: [

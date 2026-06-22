@@ -19,6 +19,10 @@ export type ProfileContent = {
     meta: string;
     marker: string;
   };
+  mapVisual: {
+    origin: string;
+    destination: string;
+  };
   ui: {
     languageSwitcherLabel: string;
     languages: LanguageOption[];

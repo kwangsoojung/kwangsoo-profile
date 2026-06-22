@@ -17,79 +17,36 @@ import { Container } from './components/Container';
 import { Eyebrow } from './components/Eyebrow';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { Section } from './components/Section';
+import {
+  EcommerceInterfaceVisual,
+  HeroVisual,
+  KoreaFranceMapVisual,
+  ProductSketchVisual,
+  RetailGridVisual,
+} from './components/visuals';
 import { en } from './content/en';
 import { fr } from './content/fr';
 import { kr } from './content/kr';
 import type { LanguageCode, ProfileContent } from './content/types';
 
 const capabilityIcons = [PenLine, Store, Boxes, ShoppingBag, Route, ArrowUpRight];
+const chapterVisuals = [
+  ProductSketchVisual,
+  KoreaFranceMapVisual,
+  EcommerceInterfaceVisual,
+  RetailGridVisual,
+];
+const workVisuals = [
+  RetailGridVisual,
+  EcommerceInterfaceVisual,
+  ProductSketchVisual,
+  KoreaFranceMapVisual,
+];
 const contentByLanguage: Record<LanguageCode, ProfileContent> = { en, fr, kr };
 const languageStorageKey = 'kwangsoo-profile-language';
 
 function isLanguageCode(value: string | null): value is LanguageCode {
   return value === 'en' || value === 'fr' || value === 'kr';
-}
-
-function HeroVisual({ visual }: { visual: ProfileContent['heroVisual'] }) {
-  return (
-    <div className="relative min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 sm:min-h-[32rem] lg:min-h-[42rem]">
-      <div className="absolute inset-x-0 top-1/2 h-px bg-line" />
-      <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
-      <div className="absolute left-6 top-6 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-ink-500/75">
-        {visual.meta}
-      </div>
-      <div className="absolute bottom-6 right-6 text-right font-display text-5xl font-medium leading-none text-brand-700 sm:text-7xl">
-        {visual.marker}
-      </div>
-      <svg
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 520 680"
-        fill="none"
-      >
-        <path
-          d="M78 540C154 398 202 188 372 132"
-          stroke="#8F1D1D"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M126 120H414V418H126V120Z"
-          stroke="rgba(9,8,7,.3)"
-          strokeWidth="1"
-        />
-        <path
-          d="M176 170H364V370H176V170Z"
-          stroke="rgba(9,8,7,.18)"
-          strokeWidth="1"
-        />
-        <circle cx="372" cy="132" r="62" stroke="#8F1D1D" strokeWidth="1.5" />
-        <circle cx="116" cy="552" r="84" stroke="rgba(9,8,7,.22)" strokeWidth="1" />
-        <path
-          d="M270 0V680M0 334H520"
-          stroke="rgba(9,8,7,.09)"
-          strokeWidth="1"
-        />
-      </svg>
-      <div className="absolute left-[18%] top-[28%] h-28 w-28 rounded-full border border-brand-700/70" />
-      <div className="absolute right-[18%] top-[42%] h-40 w-24 border border-ink-950/20 bg-ivory-100/45" />
-      <div className="absolute bottom-[18%] left-[28%] h-3 w-40 bg-brand-700" />
-    </div>
-  );
-}
-
-function WorkVisual({ index }: { index: string }) {
-  return (
-    <div className="relative h-44 overflow-hidden border-b border-line bg-ivory-100/35">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(9,8,7,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(9,8,7,.08)_1px,transparent_1px)] bg-[size:32px_32px]" />
-      <div className="absolute left-5 top-5 font-display text-6xl font-medium text-brand-700">
-        {index}
-      </div>
-      <div className="absolute bottom-5 right-5 h-24 w-24 rounded-full border border-ink-950/25" />
-      <div className="absolute bottom-12 right-16 h-px w-40 rotate-[-24deg] bg-brand-700" />
-      <div className="absolute right-10 top-8 h-16 w-28 border border-ink-950/20" />
-    </div>
-  );
 }
 
 function App() {
@@ -193,6 +150,11 @@ function App() {
             </div>
             <div className="self-end">
               <p className="max-w-md text-lg leading-8 text-ink-700">{profile.summary}</p>
+              <KoreaFranceMapVisual
+                className="mt-9 h-64"
+                destinationLabel={profile.mapVisual.destination}
+                originLabel={profile.mapVisual.origin}
+              />
               <div className="mt-9 grid gap-0 border-t border-line">
                 {profile.pillars.map((pillar) => (
                   <article key={pillar.title} className="border-b border-line py-5">
@@ -218,29 +180,39 @@ function App() {
               </p>
             </div>
             <div className="grid gap-0 border-t border-line">
-              {profile.chapters.map((chapter) => (
-                <article
-                  key={chapter.number}
-                  className="grid gap-6 border-b border-line py-8 md:grid-cols-[7rem_minmax(0,1fr)_minmax(10rem,15rem)]"
-                >
-                  <span className="font-display text-6xl font-medium leading-none text-brand-700">
-                    {chapter.number}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
-                      {chapter.title}
-                    </h3>
-                    <div className="mt-5 space-y-2 text-base leading-7 text-ink-700">
-                      {chapter.lines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
+              {profile.chapters.map((chapter, index) => {
+                const ChapterVisual = chapterVisuals[index] ?? ProductSketchVisual;
+
+                return (
+                  <article
+                    key={chapter.number}
+                    className="grid gap-6 border-b border-line py-8 md:grid-cols-[7rem_minmax(0,1fr)_minmax(10rem,15rem)] xl:grid-cols-[7rem_minmax(0,1fr)_minmax(10rem,14rem)_13rem]"
+                  >
+                    <span className="font-display text-6xl font-medium leading-none text-brand-700">
+                      {chapter.number}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
+                        {chapter.title}
+                      </h3>
+                      <div className="mt-5 space-y-2 text-base leading-7 text-ink-700">
+                        {chapter.lines.map((line) => (
+                          <p key={line}>{line}</p>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-500 md:text-right">
-                    {chapter.company}
-                  </p>
-                </article>
-              ))}
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-500 md:text-right">
+                      {chapter.company}
+                    </p>
+                    <ChapterVisual
+                      className="h-40 md:col-span-3 xl:col-span-1"
+                      destinationLabel={profile.mapVisual.destination}
+                      marker={chapter.number}
+                      originLabel={profile.mapVisual.origin}
+                    />
+                  </article>
+                );
+              })}
             </div>
           </div>
         </Container>
@@ -290,27 +262,36 @@ function App() {
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            {profile.selectedWork.map((work, index) => (
-              <article
-                key={work.title}
-                className={`overflow-hidden border border-line ${
-                  index === 1 || index === 2 ? 'md:translate-y-10' : ''
-                }`}
-              >
-                <WorkVisual index={work.index} />
-                <div className="p-6 sm:p-8">
-                  <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">
-                    {profile.ui.caseLabel} {work.index}
-                  </p>
-                  <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
-                    {work.title}
-                  </h3>
-                  <p className="mt-5 max-w-xl text-base leading-7 text-ink-700">
-                    {work.description}
-                  </p>
-                </div>
-              </article>
-            ))}
+            {profile.selectedWork.map((work, index) => {
+              const WorkVisual = workVisuals[index] ?? RetailGridVisual;
+
+              return (
+                <article
+                  key={work.title}
+                  className={`overflow-hidden border border-line ${
+                    index === 1 || index === 2 ? 'md:translate-y-10' : ''
+                  }`}
+                >
+                  <WorkVisual
+                    className="h-48 border-x-0 border-t-0"
+                    destinationLabel={profile.mapVisual.destination}
+                    marker={work.index}
+                    originLabel={profile.mapVisual.origin}
+                  />
+                  <div className="p-6 sm:p-8">
+                    <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">
+                      {profile.ui.caseLabel} {work.index}
+                    </p>
+                    <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
+                      {work.title}
+                    </h3>
+                    <p className="mt-5 max-w-xl text-base leading-7 text-ink-700">
+                      {work.description}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </Container>
       </Section>
