@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'JUNG KWANG SOO',
+  nameParts: ['JUNG', 'KWANG', 'SOO'],
   location: 'Korea ↔ France',
   positioning: 'Product, Retail & E-commerce Operations Project Manager',
   discipline: 'Product · Retail · E-commerce Operations',
@@ -9,77 +9,101 @@ export const profile = {
     'Connecting product, brand and market execution between Korea and France.',
   positioningStatement:
     'I work where product, brand and market execution meet.',
-  positioningCopy:
-    'Kwang Soo brings structure to moving parts: a brief, a supplier, a sales floor, a marketplace, a launch date. His work sits close to real customers and even closer to the teams who make ideas usable.',
-  timeline: [
+  pillars: [
+    {
+      title: 'Product Operations',
+      description: 'Turning range, sourcing and timing into a usable path.',
+    },
+    {
+      title: 'Retail Marketing',
+      description: 'Making stories clear in physical spaces and launch moments.',
+    },
+    {
+      title: 'E-commerce Execution',
+      description: 'Keeping digital stores coherent across languages and markets.',
+    },
+  ],
+  chapters: [
     {
       number: '01',
       title: 'Product & Furniture Development',
       company: 'EMONS / LBF',
-      description:
-        'Shaped concepts into practical ranges, balancing material choices, sourcing realities and the way people live with objects.',
+      lines: [
+        'Shaped concepts into practical furniture ranges.',
+        'Balanced material choices, sourcing reality and everyday use.',
+      ],
     },
     {
       number: '02',
       title: 'France Market & Purchasing Operations',
       company: 'ORCOM Europe',
-      description:
-        'Worked between local needs and supplier networks, turning distance, language and timing into a clearer operating rhythm.',
+      lines: [
+        'Worked between local needs and supplier networks.',
+        'Made distance, language and timing easier to manage.',
+      ],
     },
     {
       number: '03',
       title: 'E-commerce & Brand Operations',
       company: 'ACE FOOD',
-      description:
-        'Supported digital selling with cleaner catalogs, multilingual storefront care and brand details that help people decide.',
+      lines: [
+        'Supported storefront structure and catalog clarity.',
+        'Helped brand details travel across digital buying moments.',
+      ],
     },
     {
       number: '04',
       title: 'Retail Marketing & Product Communication',
       company: 'HSAD-GIIR / LG-related projects',
-      description:
-        'Connected launch stories, display systems and production partners so technology could be understood in physical space.',
+      lines: [
+        'Connected launch stories with display systems.',
+        'Worked close to production partners and physical presentation.',
+      ],
     },
   ],
   capabilities: [
-    'Product Communication',
-    'Retail Marketing',
-    'Business Operations',
-    'E-commerce Operations',
-    'Cross-border Coordination',
-    'Design & Product Sense',
+    { title: 'Product Communication', note: 'clear offer logic' },
+    { title: 'Retail Marketing', note: 'space, display, launch' },
+    { title: 'Business Operations', note: 'process and timing' },
+    { title: 'E-commerce Operations', note: 'storefront discipline' },
+    { title: 'Cross-border Coordination', note: 'Korea-France rhythm' },
+    { title: 'Design & Product Sense', note: 'detail with restraint' },
   ],
   selectedWork: [
     {
-      title: 'Retail display & product communication',
+      title: 'Retail Display & Product Communication',
+      index: 'A',
       description:
-        'In-store stories, presentation details and launch materials built to make complex offers feel immediate.',
+        'In-store stories and launch details designed to make complex offers feel immediate.',
     },
     {
-      title: 'Shopify multilingual operations',
+      title: 'Shopify Multilingual Operations',
+      index: 'B',
       description:
-        'Storefront structure, catalog hygiene and localized content prepared for customers across markets.',
+        'Storefront structure, catalog hygiene and localized content prepared across markets.',
     },
     {
-      title: 'Product development & sourcing',
+      title: 'Product Development & Sourcing',
+      index: 'C',
       description:
-        'From concept notes to supplier coordination, with attention to quality, timing and commercial fit.',
+        'From concept notes to supplier coordination, with care for quality and fit.',
     },
     {
-      title: 'Brand, space & production coordination',
+      title: 'Brand, Space & Production Coordination',
+      index: 'D',
       description:
-        'A practical bridge between creative intent, physical constraints and the people responsible for delivery.',
+        'A practical bridge between creative intent, physical constraints and delivery teams.',
     },
   ],
   cvFiles: [
-    { label: 'Korean CV', href: '/cv/jung-kwang-soo-ko.pdf' },
-    { label: 'English CV', href: '/cv/jung-kwang-soo-en.pdf' },
-    { label: 'French CV', href: '/cv/jung-kwang-soo-fr.pdf' },
+    { label: 'Korean CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
+    { label: 'English CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
+    { label: 'French CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
   ],
   contact: {
-    email: 'hello@example.com',
-    area: 'Paris area',
-    linkedIn: 'LinkedIn placeholder',
-    portfolio: 'Portfolio placeholder',
+    email: 'jungkwangsoo.paris@gmail.com',
+    area: 'Paris area, France',
+    linkedIn: 'https://www.linkedin.com/in/jungkwangsoo/',
+    cta: 'For product, retail, e-commerce or Korea-France coordination opportunities.',
   },
 };
