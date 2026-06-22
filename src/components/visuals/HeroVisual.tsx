@@ -7,10 +7,10 @@ type HeroVisualProps = {
 
 export function HeroVisual({ visual }: HeroVisualProps) {
   return (
-    <div className="relative min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 sm:min-h-[32rem] lg:min-h-[42rem]">
+    <div className="relative h-full min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 backdrop-blur-[2px] sm:min-h-[32rem] lg:min-h-full">
       <div className="absolute inset-x-0 top-1/2 h-px bg-line" />
       <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
-      <div className="absolute left-6 top-6 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-ink-500/75">
+      <div className="absolute left-5 top-5 z-20 border border-line bg-ivory-50/72 px-3 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.24em] text-ink-500/80 backdrop-blur-md">
         {visual.meta}
       </div>
       <div className="absolute bottom-6 right-6 text-right font-display text-5xl font-medium leading-none text-brand-700 sm:text-7xl">

@@ -85,6 +85,7 @@ function App() {
     const storedLanguage = window.localStorage.getItem(languageStorageKey);
     return isLanguageCode(storedLanguage) ? storedLanguage : 'en';
   });
+  const [isHeaderCompact, setIsHeaderCompact] = useState(false);
   const profile = contentByLanguage[language];
   const isKorean = language === 'kr';
   const displayProfile = isKorean ? en : profile;
@@ -94,10 +95,25 @@ function App() {
     document.documentElement.lang = profile.htmlLang;
   }, [language, profile.htmlLang]);
 
+  useEffect(() => {
+    const updateHeader = () => {
+      setIsHeaderCompact(window.scrollY > 24);
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
+
   return (
     <main className="min-h-screen text-ink-950" lang={profile.htmlLang}>
-      <header className="border-b border-line">
-        <Container className="flex min-h-16 items-center justify-between gap-4 py-4">
+      <header className="sticky top-0 z-50 border-b border-line bg-ivory-50/82 backdrop-blur-md transition-colors duration-300">
+        <Container
+          className={`flex items-center justify-between gap-4 transition-[min-height,padding] duration-300 ${
+            isHeaderCompact ? 'min-h-14 py-2' : 'min-h-16 py-4'
+          }`}
+        >
           <a
             href="/"
             className="text-sm font-semibold uppercase tracking-[0.24em] text-ink-950"
@@ -127,17 +143,17 @@ function App() {
         </Container>
       </header>
 
-      <section className="border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
+      <section className="overflow-hidden border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34vw)] lg:items-stretch">
-            <div className="flex min-h-[34rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[42rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)]">
-              <div>
+          <div className="relative">
+            <div className="relative z-10 flex min-h-[36rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[44rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)] lg:pr-[min(19vw,16rem)]">
+              <div className="relative">
                 <p className="text-base font-bold uppercase tracking-[0.18em] text-brand-700 sm:text-lg">
                   {profile.location}
                 </p>
-                <h1 className="mt-12 font-display text-[clamp(5rem,20vw,15rem)] font-medium uppercase leading-[0.72] tracking-[-0.05em] text-ink-950 sm:mt-14 lg:mt-16">
+                <h1 className="relative z-0 mt-12 max-w-none font-display text-[clamp(4.7rem,18vw,14.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] text-ink-950 sm:mt-14 sm:text-[clamp(7rem,18vw,14.5rem)] lg:mt-16 lg:w-[calc(100%+min(20vw,18rem))]">
                   {displayProfile.nameParts.map((part) => (
-                    <span key={part} className="block">
+                    <span key={part} className="block whitespace-nowrap">
                       {part}
                     </span>
                   ))}
@@ -168,7 +184,9 @@ function App() {
                 </div>
               </div>
             </div>
-            <HeroVisual visual={profile.heroVisual} />
+            <div className="relative z-20 mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:top-4 lg:mt-0 lg:w-[min(34vw,28rem)]">
+              <HeroVisual visual={profile.heroVisual} />
+            </div>
           </div>
         </Container>
       </section>
@@ -194,9 +212,16 @@ function App() {
                 originLabel={profile.mapVisual.origin}
               />
               <div className="mt-9 grid gap-0 border-t border-line">
-                {profile.pillars.map((pillar) => (
+                {profile.pillars.map((pillar, index) => (
                   <article key={pillar.title} className="border-b border-line py-5">
-                    <h3 className="text-lg font-semibold text-ink-950">{pillar.title}</h3>
+                    <h3 className="text-lg font-semibold text-ink-950">
+                      {isKorean ? displayProfile.pillars[index].title : pillar.title}
+                    </h3>
+                    {isKorean ? (
+                      <p className="mt-2 text-sm font-medium leading-6 text-ink-700">
+                        {pillar.title}
+                      </p>
+                    ) : null}
                     <p className="mt-2 text-sm leading-6 text-ink-500">
                       {pillar.description}
                     </p>

@@ -5,7 +5,7 @@ export const kr = {
   htmlLang: 'ko',
   nameParts: ['JUNG', 'KWANG', 'SOO'],
   brandName: 'Jung Kwang Soo',
-  location: '한국 ↔ 프랑스',
+  location: 'Korea ↔ France ↔ Europe',
   discipline: '제품 개발 운영 · 리테일 마케팅 · 이커머스 구축 및 실행',
   quote:
     '제품은 아이디어만으로 시장에서 살아남지 못합니다. 구조, 타이밍, 사람, 그리고 현지 이해가 필요합니다.',
@@ -14,7 +14,7 @@ export const kr = {
   positioningStatement:
     '제품, 브랜드, 시장 실행이 만나는 지점. 제가 일합니다.',
   heroVisual: {
-    meta: '서울 / 파리',
+    meta: 'Seoul / Paris / Europe',
     marker: '01',
     background: {
       src: '/images/hero/hero-background.png',

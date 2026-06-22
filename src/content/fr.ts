@@ -5,7 +5,7 @@ export const fr = {
   htmlLang: 'fr',
   nameParts: ['JUNG', 'KWANG', 'SOO'],
   brandName: 'Jung Kwang Soo',
-  location: 'Corée ↔ France',
+  location: 'Korea ↔ France ↔ Europe',
   discipline: 'Opérations produit · Marketing retail · Exécution e-commerce',
   quote:
     'Un produit ne se construit pas seulement avec une idée. Il lui faut une structure, le bon timing, les bonnes personnes et une compréhension locale.',
@@ -14,7 +14,7 @@ export const fr = {
   positioningStatement:
     'Je travaille au croisement du produit, de la marque et de l’exécution marché.',
   heroVisual: {
-    meta: 'Séoul / Paris',
+    meta: 'Seoul / Paris / Europe',
     marker: '01',
     background: {
       src: '/images/hero/hero-background.png',
