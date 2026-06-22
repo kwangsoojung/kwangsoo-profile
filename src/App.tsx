@@ -24,7 +24,7 @@ function HeroVisual() {
     <div className="relative min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 sm:min-h-[32rem] lg:min-h-[42rem]">
       <div className="absolute inset-x-0 top-1/2 h-px bg-line" />
       <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
-      <div className="absolute left-6 top-6 text-xs font-semibold uppercase tracking-[0.22em] text-brand-700">
+      <div className="absolute left-6 top-6 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-ink-500/75">
         Seoul / Paris
       </div>
       <div className="absolute bottom-6 right-6 text-right font-display text-5xl font-medium leading-none text-brand-700 sm:text-7xl">
@@ -114,8 +114,10 @@ function App() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34vw)] lg:items-stretch">
             <div className="flex min-h-[34rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[42rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)]">
               <div>
-                <Eyebrow>{profile.location}</Eyebrow>
-                <h1 className="mt-8 font-display text-[clamp(5rem,20vw,15rem)] font-medium uppercase leading-[0.72] tracking-[-0.05em] text-ink-950">
+                <p className="text-base font-bold uppercase tracking-[0.18em] text-brand-700 sm:text-lg">
+                  {profile.location}
+                </p>
+                <h1 className="mt-12 font-display text-[clamp(5rem,20vw,15rem)] font-medium uppercase leading-[0.72] tracking-[-0.05em] text-ink-950 sm:mt-14 lg:mt-16">
                   {profile.nameParts.map((part) => (
                     <span key={part} className="block">
                       {part}
