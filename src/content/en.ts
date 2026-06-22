@@ -16,6 +16,16 @@ export const en = {
   heroVisual: {
     meta: 'Seoul / Paris',
     marker: '01',
+    background: {
+      src: '/images/hero/hero-background.png',
+      alt: 'Abstract editorial background for Jung Kwang Soo',
+      fallback: 'Editorial background',
+    },
+    portrait: {
+      src: '/images/hero/portrait-cutout.png',
+      alt: 'Portrait of Jung Kwang Soo',
+      fallback: 'Portrait asset pending',
+    },
   },
   mapVisual: {
     origin: 'KR',
@@ -76,6 +86,18 @@ export const en = {
         'Shaped concepts into practical furniture ranges.',
         'Balanced material choices, sourcing reality and everyday use.',
       ],
+      logos: [
+        {
+          src: '/images/logos/emons.png',
+          alt: 'EMONS logo',
+          fallback: 'EMONS',
+        },
+        {
+          src: '/images/logos/lbf.png',
+          alt: 'LBF logo',
+          fallback: 'LBF',
+        },
+      ],
     },
     {
       number: '02',
@@ -84,6 +106,13 @@ export const en = {
       lines: [
         'Worked between local needs and supplier networks.',
         'Made distance, language and timing easier to manage.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/orcom.png',
+          alt: 'ORCOM Europe logo',
+          fallback: 'ORCOM',
+        },
       ],
     },
     {
@@ -94,6 +123,13 @@ export const en = {
         'Supported storefront structure and catalog clarity.',
         'Helped brand details travel across digital buying moments.',
       ],
+      logos: [
+        {
+          src: '/images/logos/ace-food.png',
+          alt: 'ACE FOOD logo',
+          fallback: 'ACE FOOD',
+        },
+      ],
     },
     {
       number: '04',
@@ -102,6 +138,13 @@ export const en = {
       lines: [
         'Connected launch stories with display systems.',
         'Worked close to production partners and physical presentation.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/hsad-giir.png',
+          alt: 'HSAD-GIIR logo',
+          fallback: 'HSAD-GIIR',
+        },
       ],
     },
   ],
@@ -121,24 +164,44 @@ export const en = {
       index: 'A',
       description:
         'In-store stories and launch details designed to make complex offers feel immediate.',
+      image: {
+        src: '/images/work/retail-display.png',
+        alt: 'Retail display and product communication work',
+        fallback: 'Retail display',
+      },
     },
     {
       title: 'Shopify Multilingual Operations',
       index: 'B',
       description:
         'Storefront structure, catalog hygiene and localized content prepared across markets.',
+      image: {
+        src: '/images/work/ecommerce-operations.png',
+        alt: 'E-commerce operations work',
+        fallback: 'E-commerce operations',
+      },
     },
     {
       title: 'Product Development & Sourcing',
       index: 'C',
       description:
         'From concept notes to supplier coordination, with care for quality and fit.',
+      image: {
+        src: '/images/work/product-development.png',
+        alt: 'Product development and sourcing work',
+        fallback: 'Product development',
+      },
     },
     {
       title: 'Brand, Space & Production Coordination',
       index: 'D',
       description:
         'A practical bridge between creative intent, physical constraints and delivery teams.',
+      image: {
+        src: '/images/work/brand-space-production.png',
+        alt: 'Brand, space and production coordination work',
+        fallback: 'Brand and space',
+      },
     },
   ],
   cv: {

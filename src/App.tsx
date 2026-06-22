@@ -16,6 +16,7 @@ import { Button } from './components/Button';
 import { Container } from './components/Container';
 import { Eyebrow } from './components/Eyebrow';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
+import { LogoImage } from './components/LogoImage';
 import { Section } from './components/Section';
 import {
   EcommerceInterfaceVisual,
@@ -23,6 +24,7 @@ import {
   KoreaFranceMapVisual,
   ProductSketchVisual,
   RetailGridVisual,
+  WorkImageVisual,
 } from './components/visuals';
 import { en } from './content/en';
 import { fr } from './content/fr';
@@ -49,6 +51,31 @@ function isLanguageCode(value: string | null): value is LanguageCode {
   return value === 'en' || value === 'fr' || value === 'kr';
 }
 
+function TitleWithSupport({
+  className,
+  primary,
+  support,
+  supportClassName = '',
+}: {
+  className: string;
+  primary: string;
+  support?: string;
+  supportClassName?: string;
+}) {
+  return (
+    <span className="block">
+      <span className={className}>{primary}</span>
+      {support ? (
+        <span
+          className={`mt-4 block font-sans text-base font-medium leading-7 tracking-normal text-ink-700 sm:text-lg ${supportClassName}`}
+        >
+          {support}
+        </span>
+      ) : null}
+    </span>
+  );
+}
+
 function App() {
   const [language, setLanguage] = useState<LanguageCode>(() => {
     if (typeof window === 'undefined') {
@@ -59,6 +86,8 @@ function App() {
     return isLanguageCode(storedLanguage) ? storedLanguage : 'en';
   });
   const profile = contentByLanguage[language];
+  const isKorean = language === 'kr';
+  const displayProfile = isKorean ? en : profile;
 
   useEffect(() => {
     window.localStorage.setItem(languageStorageKey, language);
@@ -107,7 +136,7 @@ function App() {
                   {profile.location}
                 </p>
                 <h1 className="mt-12 font-display text-[clamp(5rem,20vw,15rem)] font-medium uppercase leading-[0.72] tracking-[-0.05em] text-ink-950 sm:mt-14 lg:mt-16">
-                  {profile.nameParts.map((part) => (
+                  {displayProfile.nameParts.map((part) => (
                     <span key={part} className="block">
                       {part}
                     </span>
@@ -117,8 +146,13 @@ function App() {
               <div className="grid gap-7 border-t border-line pt-7 lg:grid-cols-[minmax(0,1fr)_18rem]">
                 <div>
                   <p className="max-w-3xl text-2xl font-semibold leading-tight text-brand-700 sm:text-4xl">
-                    {profile.discipline}
+                    {displayProfile.discipline}
                   </p>
+                  {isKorean ? (
+                    <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-ink-700 sm:text-base">
+                      {profile.discipline}
+                    </p>
+                  ) : null}
                   <blockquote className="mt-5 max-w-2xl font-display text-2xl font-medium leading-tight text-ink-950 sm:text-3xl">
                     “{profile.quote}”
                   </blockquote>
@@ -145,7 +179,11 @@ function App() {
             <div>
               <Eyebrow>{profile.ui.sections.positioning}</Eyebrow>
               <h2 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[0.96] tracking-tight text-ink-950 sm:text-7xl">
-                “{profile.positioningStatement}”
+                <TitleWithSupport
+                  className="block"
+                  primary={`“${displayProfile.positioningStatement}”`}
+                  support={isKorean ? `“${profile.positioningStatement}”` : undefined}
+                />
               </h2>
             </div>
             <div className="self-end">
@@ -176,7 +214,12 @@ function App() {
             <div>
               <Eyebrow>{profile.ui.sections.narrative}</Eyebrow>
               <p className="mt-6 max-w-xs font-display text-3xl font-medium leading-tight text-ink-950">
-                {profile.narrativeIntro}
+                <TitleWithSupport
+                  className="block"
+                  primary={displayProfile.narrativeIntro}
+                  support={isKorean ? profile.narrativeIntro : undefined}
+                  supportClassName="text-sm sm:text-base"
+                />
               </p>
             </div>
             <div className="grid gap-0 border-t border-line">
@@ -193,7 +236,12 @@ function App() {
                     </span>
                     <div>
                       <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
-                        {chapter.title}
+                        <TitleWithSupport
+                          className="block"
+                          primary={displayProfile.chapters[index].title}
+                          support={isKorean ? chapter.title : undefined}
+                          supportClassName="text-sm sm:text-base"
+                        />
                       </h3>
                       <div className="mt-5 space-y-2 text-base leading-7 text-ink-700">
                         {chapter.lines.map((line) => (
@@ -201,9 +249,16 @@ function App() {
                         ))}
                       </div>
                     </div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-500 md:text-right">
-                      {chapter.company}
-                    </p>
+                    <div className="md:text-right">
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-500">
+                        {chapter.company}
+                      </p>
+                      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 md:justify-end">
+                        {chapter.logos.map((logo) => (
+                          <LogoImage key={logo.src} logo={logo} />
+                        ))}
+                      </div>
+                    </div>
                     <ChapterVisual
                       className="h-40 md:col-span-3 xl:col-span-1"
                       destinationLabel={profile.mapVisual.destination}
@@ -224,7 +279,11 @@ function App() {
             <div>
               <Eyebrow>{profile.ui.sections.capabilities}</Eyebrow>
               <h2 className="mt-5 font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
-                {profile.capabilitiesHeading}
+                <TitleWithSupport
+                  className="block"
+                  primary={displayProfile.capabilitiesHeading}
+                  support={isKorean ? profile.capabilitiesHeading : undefined}
+                />
               </h2>
             </div>
             <div className="grid grid-cols-2 border-l border-t border-line md:grid-cols-3">
@@ -240,8 +299,13 @@ function App() {
                       <Icon aria-hidden="true" size={19} strokeWidth={1.6} />
                     </div>
                     <h3 className="text-base font-semibold leading-tight text-ink-950 sm:text-lg">
-                      {capability.title}
+                      {displayProfile.capabilities[index].title}
                     </h3>
+                    {isKorean ? (
+                      <p className="mt-2 text-sm font-medium leading-6 text-ink-700">
+                        {capability.title}
+                      </p>
+                    ) : null}
                     <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-ink-500">
                       {capability.note}
                     </p>
@@ -258,12 +322,16 @@ function App() {
           <div className="mb-12 grid gap-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-end">
             <Eyebrow>{profile.ui.sections.selectedWork}</Eyebrow>
             <h2 className="max-w-4xl font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
-              {profile.selectedWorkHeading}
+              <TitleWithSupport
+                className="block"
+                primary={displayProfile.selectedWorkHeading}
+                support={isKorean ? profile.selectedWorkHeading : undefined}
+              />
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {profile.selectedWork.map((work, index) => {
-              const WorkVisual = workVisuals[index] ?? RetailGridVisual;
+              const WorkFallbackVisual = workVisuals[index] ?? RetailGridVisual;
 
               return (
                 <article
@@ -272,19 +340,29 @@ function App() {
                     index === 1 || index === 2 ? 'md:translate-y-10' : ''
                   }`}
                 >
-                  <WorkVisual
-                    className="h-48 border-x-0 border-t-0"
-                    destinationLabel={profile.mapVisual.destination}
-                    marker={work.index}
-                    originLabel={profile.mapVisual.origin}
+                  <WorkImageVisual
+                    asset={work.image}
+                    fallback={
+                      <WorkFallbackVisual
+                        className="h-full border-0"
+                        destinationLabel={profile.mapVisual.destination}
+                        marker={work.index}
+                        originLabel={profile.mapVisual.origin}
+                      />
+                    }
                   />
                   <div className="p-6 sm:p-8">
                     <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">
                       {profile.ui.caseLabel} {work.index}
                     </p>
-                    <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
-                      {work.title}
-                    </h3>
+                  <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
+                    <TitleWithSupport
+                      className="block"
+                      primary={displayProfile.selectedWork[index].title}
+                      support={isKorean ? work.title : undefined}
+                      supportClassName="text-sm sm:text-base"
+                    />
+                  </h3>
                     <p className="mt-5 max-w-xl text-base leading-7 text-ink-700">
                       {work.description}
                     </p>
@@ -303,7 +381,11 @@ function App() {
               <div>
                 <Eyebrow>{profile.ui.sections.cv}</Eyebrow>
                 <h2 className="mt-5 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
-                  {profile.cv.heading}
+                  <TitleWithSupport
+                    className="block"
+                    primary={displayProfile.cv.heading}
+                    support={isKorean ? profile.cv.heading : undefined}
+                  />
                 </h2>
               </div>
               <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -325,7 +407,11 @@ function App() {
             <div>
               <Eyebrow>{profile.ui.sections.contact}</Eyebrow>
               <h2 className="mt-6 max-w-4xl font-display text-5xl font-medium leading-[0.98] tracking-tight text-ink-950 sm:text-7xl">
-                {profile.contact.cta}
+                <TitleWithSupport
+                  className="block"
+                  primary={displayProfile.contact.cta}
+                  support={isKorean ? profile.contact.cta : undefined}
+                />
               </h2>
             </div>
             <div className="self-end border-t border-line pt-7">

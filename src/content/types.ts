@@ -5,6 +5,12 @@ export type LanguageOption = {
   label: string;
 };
 
+export type ReplaceableAsset = {
+  src: string;
+  alt: string;
+  fallback: string;
+};
+
 export type ProfileContent = {
   lang: LanguageCode;
   htmlLang: string;
@@ -18,6 +24,8 @@ export type ProfileContent = {
   heroVisual: {
     meta: string;
     marker: string;
+    background: ReplaceableAsset;
+    portrait: ReplaceableAsset;
   };
   mapVisual: {
     origin: string;
@@ -59,6 +67,7 @@ export type ProfileContent = {
     title: string;
     company: string;
     lines: string[];
+    logos: ReplaceableAsset[];
   }>;
   narrativeIntro: string;
   capabilitiesHeading: string;
@@ -71,6 +80,7 @@ export type ProfileContent = {
     title: string;
     index: string;
     description: string;
+    image: ReplaceableAsset;
   }>;
   cv: {
     heading: string;

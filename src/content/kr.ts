@@ -16,6 +16,16 @@ export const kr = {
   heroVisual: {
     meta: '서울 / 파리',
     marker: '01',
+    background: {
+      src: '/images/hero/hero-background.png',
+      alt: '정광수 프로필을 위한 추상 배경 이미지',
+      fallback: 'Editorial background',
+    },
+    portrait: {
+      src: '/images/hero/portrait-cutout.png',
+      alt: '정광수 프로필 사진',
+      fallback: 'Portrait asset pending',
+    },
   },
   mapVisual: {
     origin: 'KR',
@@ -76,6 +86,18 @@ export const kr = {
         '아이디어를 실제 제품군으로 구체화했습니다.',
         '소재, 소싱, 사용성을 함께 보며 균형을 잡았습니다.',
       ],
+      logos: [
+        {
+          src: '/images/logos/emons.png',
+          alt: 'EMONS 로고',
+          fallback: 'EMONS',
+        },
+        {
+          src: '/images/logos/lbf.png',
+          alt: 'LBF 로고',
+          fallback: 'LBF',
+        },
+      ],
     },
     {
       number: '02',
@@ -84,6 +106,13 @@ export const kr = {
       lines: [
         '현지 요구와 공급 네트워크 사이를 연결했습니다.',
         '거리, 언어, 일정의 복잡도를 운영 가능한 흐름으로 바꿨습니다.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/orcom.png',
+          alt: 'ORCOM Europe 로고',
+          fallback: 'ORCOM',
+        },
       ],
     },
     {
@@ -94,6 +123,13 @@ export const kr = {
         '스토어 구조와 상품 정보를 정리했습니다.',
         '온라인 구매 과정에서 브랜드가 일관되게 보이도록 운영했습니다.',
       ],
+      logos: [
+        {
+          src: '/images/logos/ace-food.png',
+          alt: 'ACE FOOD 로고',
+          fallback: 'ACE FOOD',
+        },
+      ],
     },
     {
       number: '04',
@@ -102,6 +138,13 @@ export const kr = {
       lines: [
         '런칭 메시지와 매장 디스플레이를 연결했습니다.',
         '제작 파트너와 현장 조건을 함께 조율했습니다.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/hsad-giir.png',
+          alt: 'HSAD-GIIR 로고',
+          fallback: 'HSAD-GIIR',
+        },
       ],
     },
   ],
@@ -121,24 +164,44 @@ export const kr = {
       index: 'A',
       description:
         '매장 안에서 제품의 가치가 빠르게 이해되도록 이야기와 디테일을 정리했습니다.',
+      image: {
+        src: '/images/work/retail-display.png',
+        alt: '리테일 디스플레이와 제품 커뮤니케이션 작업 이미지',
+        fallback: 'Retail display',
+      },
     },
     {
       title: 'Shopify 다국어 운영',
       index: 'B',
       description:
         '스토어 구조, 상품 정보, 현지화 콘텐츠를 시장에 맞게 관리했습니다.',
+      image: {
+        src: '/images/work/ecommerce-operations.png',
+        alt: '이커머스 운영 작업 이미지',
+        fallback: 'E-commerce operations',
+      },
     },
     {
       title: '제품 개발 & 소싱',
       index: 'C',
       description:
         '컨셉 정리부터 공급 파트너 조율까지 품질과 적합성을 함께 보았습니다.',
+      image: {
+        src: '/images/work/product-development.png',
+        alt: '제품 개발과 소싱 작업 이미지',
+        fallback: 'Product development',
+      },
     },
     {
       title: '브랜드, 공간 & 제작 조율',
       index: 'D',
       description:
         '크리에이티브 방향, 물리적 조건, 실행 팀 사이의 연결을 만들었습니다.',
+      image: {
+        src: '/images/work/brand-space-production.png',
+        alt: '브랜드, 공간, 제작 조율 작업 이미지',
+        fallback: 'Brand and space',
+      },
     },
   ],
   cv: {

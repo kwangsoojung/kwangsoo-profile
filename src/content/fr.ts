@@ -16,6 +16,16 @@ export const fr = {
   heroVisual: {
     meta: 'Séoul / Paris',
     marker: '01',
+    background: {
+      src: '/images/hero/hero-background.png',
+      alt: 'Fond éditorial abstrait pour Jung Kwang Soo',
+      fallback: 'Fond éditorial',
+    },
+    portrait: {
+      src: '/images/hero/portrait-cutout.png',
+      alt: 'Portrait de Jung Kwang Soo',
+      fallback: 'Portrait à ajouter',
+    },
   },
   mapVisual: {
     origin: 'KR',
@@ -76,6 +86,18 @@ export const fr = {
         'Transformer des concepts en gammes concrètes.',
         'Tenir ensemble matériaux, sourcing et usages quotidiens.',
       ],
+      logos: [
+        {
+          src: '/images/logos/emons.png',
+          alt: 'Logo EMONS',
+          fallback: 'EMONS',
+        },
+        {
+          src: '/images/logos/lbf.png',
+          alt: 'Logo LBF',
+          fallback: 'LBF',
+        },
+      ],
     },
     {
       number: '02',
@@ -84,6 +106,13 @@ export const fr = {
       lines: [
         'Faire le lien entre besoins locaux et réseaux fournisseurs.',
         'Rendre la distance, la langue et le timing plus simples.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/orcom.png',
+          alt: 'Logo ORCOM Europe',
+          fallback: 'ORCOM',
+        },
       ],
     },
     {
@@ -94,6 +123,13 @@ export const fr = {
         'Clarifier la boutique, le catalogue et les contenus.',
         'Aider la marque à rester cohérente dans l’achat en ligne.',
       ],
+      logos: [
+        {
+          src: '/images/logos/ace-food.png',
+          alt: 'Logo ACE FOOD',
+          fallback: 'ACE FOOD',
+        },
+      ],
     },
     {
       number: '04',
@@ -102,6 +138,13 @@ export const fr = {
       lines: [
         'Relier récits de lancement et dispositifs de présentation.',
         'Travailler près des partenaires de production et du terrain.',
+      ],
+      logos: [
+        {
+          src: '/images/logos/hsad-giir.png',
+          alt: 'Logo HSAD-GIIR',
+          fallback: 'HSAD-GIIR',
+        },
       ],
     },
   ],
@@ -121,24 +164,44 @@ export const fr = {
       index: 'A',
       description:
         'Des récits en magasin et des détails de lancement qui rendent l’offre immédiate.',
+      image: {
+        src: '/images/work/retail-display.png',
+        alt: 'Travail de retail display et communication produit',
+        fallback: 'Retail display',
+      },
     },
     {
       title: 'Opérations Shopify multilingues',
       index: 'B',
       description:
         'Structure de boutique, catalogue propre et contenu localisé entre marchés.',
+      image: {
+        src: '/images/work/ecommerce-operations.png',
+        alt: 'Travail d’opérations e-commerce',
+        fallback: 'E-commerce',
+      },
     },
     {
       title: 'Développement produit & sourcing',
       index: 'C',
       description:
         'Des notes de concept à la coordination fournisseurs, avec exigence et justesse.',
+      image: {
+        src: '/images/work/product-development.png',
+        alt: 'Travail de développement produit et sourcing',
+        fallback: 'Développement produit',
+      },
     },
     {
       title: 'Coordination marque, espace & production',
       index: 'D',
       description:
         'Un lien pratique entre intention créative, contraintes physiques et livraison.',
+      image: {
+        src: '/images/work/brand-space-production.png',
+        alt: 'Travail de coordination marque, espace et production',
+        fallback: 'Marque et espace',
+      },
     },
   ],
   cv: {

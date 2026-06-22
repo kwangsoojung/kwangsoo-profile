@@ -1,4 +1,5 @@
 import type { ProfileContent } from '../../content/types';
+import { AssetImage } from '../AssetImage';
 
 type HeroVisualProps = {
   visual: ProfileContent['heroVisual'];
@@ -15,6 +16,12 @@ export function HeroVisual({ visual }: HeroVisualProps) {
       <div className="absolute bottom-6 right-6 text-right font-display text-5xl font-medium leading-none text-brand-700 sm:text-7xl">
         {visual.marker}
       </div>
+      <AssetImage
+        alt={visual.background.alt}
+        className="absolute inset-0 h-full w-full object-cover opacity-50 mix-blend-multiply"
+        fallback={null}
+        src={visual.background.src}
+      />
       <svg
         aria-hidden="true"
         className="absolute inset-0 h-full w-full"
@@ -36,6 +43,18 @@ export function HeroVisual({ visual }: HeroVisualProps) {
       <div className="absolute left-[18%] top-[28%] h-28 w-28 rounded-full border border-brand-700/70" />
       <div className="absolute right-[18%] top-[42%] h-40 w-24 border border-ink-950/20 bg-ivory-100/45" />
       <div className="absolute bottom-[18%] left-[28%] h-3 w-40 bg-brand-700" />
+      <div className="absolute inset-x-8 bottom-0 top-20 flex items-end justify-center sm:inset-x-10 sm:top-24">
+        <AssetImage
+          alt={visual.portrait.alt}
+          className="max-h-full w-full object-contain object-bottom"
+          fallback={
+            <div className="mb-8 flex h-[72%] w-[70%] max-w-80 items-center justify-center border border-dashed border-line bg-ivory-50/55 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-500">
+              {visual.portrait.fallback}
+            </div>
+          }
+          src={visual.portrait.src}
+        />
+      </div>
     </div>
   );
 }
