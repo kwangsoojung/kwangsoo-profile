@@ -39,8 +39,9 @@ export const fr = {
       { code: 'kr', label: 'KR' },
     ],
     nav: {
+      cv: 'CV',
       profile: 'Profil',
-      work: 'Travaux',
+      work: 'Réalisations',
       contact: 'Contact',
     },
     cta: {
@@ -149,6 +150,7 @@ export const fr = {
     },
   ],
   handsOn: {
+    headline: 'LE RÉEL, AU-DELÀ DES PROJETS',
     title: 'BUILT, RAN, LEARNED',
     subtitle: 'Créer, gérer, apprendre par le réel',
     body:
@@ -156,9 +158,10 @@ export const fr = {
     cards: [
       {
         title: 'Woodworking Studio Operations',
+        subtitle: 'Gestion d’un atelier bois',
         lines: [
-          'Fabrication sur mesure, matériaux, devis, délais de production et suivi de livraison',
-          'Un lien concret entre intention design et contraintes réelles de fabrication',
+          'Commandes sur mesure, choix des matériaux, devis, planning de fabrication et suivi de livraison',
+          'Une expérience concrète entre intention design et contraintes réelles d’atelier',
         ],
         image: {
           src: '/images/work/woodworking-studio.png',
@@ -168,8 +171,9 @@ export const fr = {
       },
       {
         title: 'Residence & Hospitality Operations',
+        subtitle: 'Gestion de résidence',
         lines: [
-          'Paris Noble Residence : réservations, échanges clients, check-in/out, équipements et qualité de service',
+          'Paris Noble Residence : réservations, relation client, check-in/out, coordination des équipements et qualité de service',
           'Compréhension quotidienne de l’expérience client, de la maintenance, du timing et de la responsabilité opérationnelle',
         ],
         image: {
@@ -237,11 +241,16 @@ export const fr = {
     },
   ],
   cv: {
+    access: {
+      codeError: 'Code incorrect. Veuillez réessayer.',
+      inputLabel: 'Entrez le code d’accès',
+      unlockButton: 'Déverrouiller le CV',
+    },
     heading: 'Téléchargez le profil dans la langue de votre choix.',
     files: [
-      { label: 'CV coréen', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
-      { label: 'CV anglais', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
-      { label: 'CV français', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
+      { label: 'Télécharger le CV coréen', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
+      { label: 'Télécharger le CV anglais', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
+      { label: 'Télécharger le CV français', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
     ],
   },
   contact: {

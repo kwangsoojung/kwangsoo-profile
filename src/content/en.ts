@@ -39,8 +39,9 @@ export const en = {
       { code: 'kr', label: 'KR' },
     ],
     nav: {
+      cv: 'CV',
       profile: 'Profile',
-      work: 'Work',
+      work: 'Selected Work',
       contact: 'Contact',
     },
     cta: {
@@ -149,6 +150,7 @@ export const en = {
     },
   ],
   handsOn: {
+    headline: 'REAL OPERATIONS, BEYOND PROJECTS',
     title: 'BUILT, RAN, LEARNED',
     subtitle:
       'Corporate projects gave me structure. Running small businesses gave me reality.',
@@ -158,8 +160,8 @@ export const en = {
       {
         title: 'Woodworking Studio Operations',
         lines: [
-          'Custom making, materials, quotations, production timing and delivery follow-up',
-          'A practical bridge between design intention and real production constraints',
+          'Custom orders, material review, quotations, production timing and delivery follow-up',
+          'A practical bridge between design intention and real workshop constraints',
         ],
         image: {
           src: '/images/work/woodworking-studio.png',
@@ -238,11 +240,16 @@ export const en = {
     },
   ],
   cv: {
+    access: {
+      codeError: 'Incorrect code. Please try again.',
+      inputLabel: 'Enter access code',
+      unlockButton: 'Unlock CV',
+    },
     heading: 'Download the profile in your preferred language.',
     files: [
-      { label: 'Korean CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
-      { label: 'English CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
-      { label: 'French CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
+      { label: 'Download Korean CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
+      { label: 'Download English CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
+      { label: 'Download French CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
     ],
   },
   contact: {

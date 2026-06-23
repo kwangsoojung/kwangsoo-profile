@@ -39,9 +39,10 @@ export const kr = {
       { code: 'kr', label: 'KR' },
     ],
     nav: {
+      cv: 'CV',
       profile: '프로필',
-      work: '작업',
-      contact: '연락',
+      work: '주요 작업',
+      contact: '문의',
     },
     cta: {
       viewProfile: '프로필 보기',
@@ -149,6 +150,7 @@ export const kr = {
     },
   ],
   handsOn: {
+    headline: '프로젝트 밖에서 직접 운영한 경험',
     title: 'BUILT, RAN, LEARNED',
     subtitle: '직접 만들고, 운영하고, 배운 것들',
     body:
@@ -156,6 +158,7 @@ export const kr = {
     cards: [
       {
         title: 'Woodworking Studio Operations',
+        subtitle: '목공소 운영',
         lines: [
           '맞춤 제작, 소재 검토, 견적, 제작 일정, 납품 후속 관리',
           '디자인 의도와 실제 제작 조건 사이를 연결한 경험',
@@ -168,6 +171,7 @@ export const kr = {
       },
       {
         title: 'Residence & Hospitality Operations',
+        subtitle: '레지던스 운영',
         lines: [
           'Paris Noble Residence 운영: 예약, 고객 응대, 체크인/아웃, 시설 관리와 서비스 품질',
           '고객 경험, 유지보수, 시간 관리, 운영 책임을 매일 이해한 경험',
@@ -237,11 +241,16 @@ export const kr = {
     },
   ],
   cv: {
+    access: {
+      codeError: '코드가 올바르지 않습니다. 다시 시도해주세요.',
+      inputLabel: '접근 코드를 입력하세요',
+      unlockButton: 'CV 열기',
+    },
     heading: '원하는 언어의 CV를 다운로드하실 수 있습니다.',
     files: [
-      { label: '국문 CV', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
-      { label: '영문 CV', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
-      { label: '불문 CV', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
+      { label: '한국어 CV 다운로드', href: '/cv/Jung_Kwang_Soo_CV_KR.pdf' },
+      { label: '영어 CV 다운로드', href: '/cv/Jung_Kwang_Soo_CV_EN.pdf' },
+      { label: '프랑스어 CV 다운로드', href: '/cv/Jung_Kwang_Soo_CV_FR.pdf' },
     ],
   },
   contact: {

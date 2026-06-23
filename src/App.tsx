@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -45,6 +45,8 @@ const workVisuals = [
   KoreaFranceMapVisual,
 ];
 const contentByLanguage: Record<LanguageCode, ProfileContent> = { en, fr, kr };
+const cvAccessCode = 'JKS2026';
+const cvUnlockStorageKey = 'kwangsoo-cv-unlocked';
 const languageStorageKey = 'kwangsoo-profile-language';
 
 function isLanguageCode(value: string | null): value is LanguageCode {
@@ -85,6 +87,15 @@ function App() {
     const storedLanguage = window.localStorage.getItem(languageStorageKey);
     return isLanguageCode(storedLanguage) ? storedLanguage : 'en';
   });
+  const [cvAccessError, setCvAccessError] = useState(false);
+  const [cvCode, setCvCode] = useState('');
+  const [isCvUnlocked, setIsCvUnlocked] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.sessionStorage.getItem(cvUnlockStorageKey) === 'true';
+  });
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
   const profile = contentByLanguage[language];
   const isKorean = language === 'kr';
@@ -105,6 +116,19 @@ function App() {
 
     return () => window.removeEventListener('scroll', updateHeader);
   }, []);
+
+  function handleCvUnlock(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (cvCode.trim() === cvAccessCode) {
+      window.sessionStorage.setItem(cvUnlockStorageKey, 'true');
+      setIsCvUnlocked(true);
+      setCvAccessError(false);
+      return;
+    }
+
+    setCvAccessError(true);
+  }
 
   return (
     <main className="min-h-screen text-ink-950" lang={profile.htmlLang}>
@@ -129,6 +153,9 @@ function App() {
             </a>
             <a className="transition-colors hover:text-brand-700" href="#work">
               {profile.ui.nav.work}
+            </a>
+            <a className="transition-colors hover:text-brand-700" href="#cv">
+              {profile.ui.nav.cv}
             </a>
             <a className="transition-colors hover:text-brand-700" href="#contact">
               {profile.ui.nav.contact}
@@ -184,7 +211,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="relative z-20 mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:top-4 lg:mt-0 lg:w-[min(34vw,28rem)]">
+            <div className="pointer-events-none relative z-20 mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:top-4 lg:mt-0 lg:w-[min(34vw,28rem)]">
               <HeroVisual visual={profile.heroVisual} />
             </div>
           </div>
@@ -310,9 +337,13 @@ function App() {
                   <h2 className="font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
                     <TitleWithSupport
                       className="block"
-                      primary={displayProfile.handsOn.title}
+                      primary={displayProfile.handsOn.headline}
                       support={
-                        language === 'en' ? displayProfile.handsOn.subtitle : profile.handsOn.subtitle
+                        language === 'en'
+                          ? displayProfile.handsOn.subtitle
+                          : language === 'kr'
+                            ? profile.handsOn.headline
+                            : profile.handsOn.subtitle
                       }
                     />
                   </h2>
@@ -345,7 +376,7 @@ function App() {
                         <TitleWithSupport
                           className="block"
                           primary={displayProfile.handsOn.cards[index].title}
-                          support={isKorean ? card.title : undefined}
+                          support={card.subtitle}
                           supportClassName="text-sm sm:text-base"
                         />
                       </h3>
@@ -478,14 +509,43 @@ function App() {
                   />
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                {profile.cv.files.map((cv) => (
-                  <Button key={cv.label} href={cv.href} variant="secondary">
-                    <Download aria-hidden="true" size={17} strokeWidth={1.8} />
-                    {cv.label}
-                  </Button>
-                ))}
-              </div>
+              {isCvUnlocked ? (
+                <div className="flex flex-wrap gap-3 lg:justify-end">
+                  {profile.cv.files.map((cv) => (
+                    <Button key={cv.label} href={cv.href} variant="secondary">
+                      <Download aria-hidden="true" size={17} strokeWidth={1.8} />
+                      {cv.label}
+                    </Button>
+                  ))}
+                </div>
+              ) : (
+                <form
+                  className="flex w-full max-w-md flex-col gap-3 lg:ml-auto"
+                  onSubmit={handleCvUnlock}
+                >
+                  <input
+                    aria-label={profile.cv.access.inputLabel}
+                    className="min-h-12 rounded-full border border-line bg-ivory-50/70 px-5 text-sm font-medium text-ink-950 outline-none transition-colors placeholder:text-ink-500 focus:border-brand-700"
+                    onChange={(event) => {
+                      setCvCode(event.target.value);
+                      setCvAccessError(false);
+                    }}
+                    placeholder={profile.cv.access.inputLabel}
+                    type="password"
+                    value={cvCode}
+                  />
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button type="submit" variant="primary">
+                      {profile.cv.access.unlockButton}
+                    </Button>
+                    {cvAccessError ? (
+                      <p className="text-sm font-medium text-brand-700">
+                        {profile.cv.access.codeError}
+                      </p>
+                    ) : null}
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </Container>

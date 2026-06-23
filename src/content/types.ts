@@ -35,6 +35,7 @@ export type ProfileContent = {
     languageSwitcherLabel: string;
     languages: LanguageOption[];
     nav: {
+      cv: string;
       profile: string;
       work: string;
       contact: string;
@@ -70,11 +71,13 @@ export type ProfileContent = {
     logos: ReplaceableAsset[];
   }>;
   handsOn: {
+    headline: string;
     title: string;
     subtitle: string;
     body: string;
     cards: Array<{
       title: string;
+      subtitle?: string;
       lines: string[];
       image: ReplaceableAsset;
     }>;
@@ -93,6 +96,11 @@ export type ProfileContent = {
     image: ReplaceableAsset;
   }>;
   cv: {
+    access: {
+      codeError: string;
+      inputLabel: string;
+      unlockButton: string;
+    };
     heading: string;
     files: Array<{
       label: string;
