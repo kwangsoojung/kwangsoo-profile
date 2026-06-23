@@ -15,6 +15,7 @@ export function WorkImageVisual({
 }: WorkImageVisualProps) {
   return (
     <div className={`relative h-48 overflow-hidden bg-ivory-100/25 ${className}`}>
+      {/* Drop a replacement PNG/SVG at asset.src in /public/images to swap this visual without changing layout code. */}
       <AssetImage
         alt={asset.alt}
         className="h-full w-full object-cover"

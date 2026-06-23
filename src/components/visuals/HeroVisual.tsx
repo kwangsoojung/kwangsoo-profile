@@ -7,10 +7,10 @@ type HeroVisualProps = {
 
 export function HeroVisual({ visual }: HeroVisualProps) {
   return (
-    <div className="relative h-full min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 backdrop-blur-[2px] sm:min-h-[32rem] lg:min-h-full">
-      <div className="absolute inset-x-0 top-1/2 h-px bg-line" />
-      <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
-      <div className="absolute left-5 top-5 z-20 border border-line bg-ivory-50/72 px-3 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.24em] text-ink-500/80 backdrop-blur-md">
+    <div className="pointer-events-none relative h-full min-h-[24rem] overflow-hidden border border-line bg-ivory-50/45 p-5 backdrop-blur-[2px] transition-transform duration-300 sm:min-h-[32rem] lg:min-h-full lg:hover:-translate-y-1">
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-line" />
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-line" />
+      <div className="pointer-events-none absolute right-4 top-4 z-20 max-w-[13rem] border border-line bg-ivory-50/72 px-3 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-ink-500/80 backdrop-blur-md sm:left-5 sm:right-auto sm:max-w-none sm:tracking-[0.24em]">
         {visual.meta}
       </div>
       <div className="absolute bottom-6 right-6 text-right font-display text-5xl font-medium leading-none text-brand-700 sm:text-7xl">

@@ -310,8 +310,10 @@ function App() {
                   <h2 className="font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
                     <TitleWithSupport
                       className="block"
-                      primary={displayProfile.handsOn.subtitle}
-                      support={isKorean ? profile.handsOn.subtitle : undefined}
+                      primary={displayProfile.handsOn.title}
+                      support={
+                        language === 'en' ? displayProfile.handsOn.subtitle : profile.handsOn.subtitle
+                      }
                     />
                   </h2>
                 </div>
@@ -322,6 +324,7 @@ function App() {
               <div className="mt-10 grid gap-6 md:grid-cols-2">
                 {profile.handsOn.cards.map((card, index) => (
                   <article key={card.title} className="border-t border-line pt-6">
+                    {/* Replace these files manually in /public/images/work when real business images are ready. */}
                     <WorkImageVisual
                       asset={card.image}
                       className="h-56 bg-ivory-50/30"
