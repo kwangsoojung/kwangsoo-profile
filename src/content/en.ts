@@ -148,6 +148,39 @@ export const en = {
       ],
     },
   ],
+  handsOn: {
+    title: 'BUILT, RAN, LEARNED',
+    subtitle:
+      'Corporate projects gave me structure. Running small businesses gave me reality.',
+    body:
+      'I have operated a woodworking activity and a residence business in France — experiences that taught me how ideas meet clients, costs, timing, maintenance and daily decisions.',
+    cards: [
+      {
+        title: 'Woodworking Studio Operations',
+        lines: [
+          'Custom making, materials, quotations, production timing and delivery follow-up',
+          'A practical bridge between design intention and real production constraints',
+        ],
+        image: {
+          src: '/images/work/woodworking-studio.png',
+          alt: 'Woodworking studio operations',
+          fallback: 'Woodworking studio',
+        },
+      },
+      {
+        title: 'Residence & Hospitality Operations',
+        lines: [
+          'Paris Noble Residence operations: reservations, guest communication, check-in/out, facilities and service quality',
+          'Daily understanding of customer experience, maintenance, timing and operational responsibility',
+        ],
+        image: {
+          src: '/images/work/residence-operations.png',
+          alt: 'Residence and hospitality operations',
+          fallback: 'Residence operations',
+        },
+      },
+    ],
+  },
   capabilitiesHeading: 'Practical range, held together by taste.',
   capabilities: [
     { title: 'Product Communication', note: 'clear offer logic' },

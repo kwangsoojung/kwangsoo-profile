@@ -298,6 +298,68 @@ function App() {
         </Container>
       </Section>
 
+      <Section id="built-ran-learned">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
+            <div>
+              <Eyebrow>{profile.handsOn.title}</Eyebrow>
+            </div>
+            <div>
+              <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,0.55fr)]">
+                <div>
+                  <h2 className="font-display text-5xl font-medium leading-none tracking-tight text-ink-950 sm:text-6xl">
+                    <TitleWithSupport
+                      className="block"
+                      primary={displayProfile.handsOn.subtitle}
+                      support={isKorean ? profile.handsOn.subtitle : undefined}
+                    />
+                  </h2>
+                </div>
+                <p className="max-w-xl text-base leading-8 text-ink-700 lg:pt-2">
+                  {profile.handsOn.body}
+                </p>
+              </div>
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
+                {profile.handsOn.cards.map((card, index) => (
+                  <article key={card.title} className="border-t border-line pt-6">
+                    <WorkImageVisual
+                      asset={card.image}
+                      className="h-56 bg-ivory-50/30"
+                      fallback={
+                        <div className="relative h-full overflow-hidden bg-ivory-100/25">
+                          <div className="absolute inset-0 bg-[linear-gradient(rgba(9,8,7,.07)_1px,transparent_1px),linear-gradient(90deg,rgba(9,8,7,.07)_1px,transparent_1px)] bg-[size:28px_28px]" />
+                          <div className="absolute left-6 top-6 font-display text-5xl font-medium text-brand-700">
+                            {index + 1}
+                          </div>
+                          <div className="absolute bottom-8 left-8 h-16 w-36 border border-ink-950/20 bg-ivory-50/30" />
+                          <div className="absolute bottom-14 right-8 h-px w-36 rotate-[-18deg] bg-brand-700" />
+                          <div className="absolute right-10 top-8 h-24 w-20 rounded-full border border-ink-950/20" />
+                        </div>
+                      }
+                    />
+                    <div className="pt-6">
+                      <h3 className="font-display text-3xl font-medium leading-tight text-ink-950">
+                        <TitleWithSupport
+                          className="block"
+                          primary={displayProfile.handsOn.cards[index].title}
+                          support={isKorean ? card.title : undefined}
+                          supportClassName="text-sm sm:text-base"
+                        />
+                      </h3>
+                      <div className="mt-5 space-y-3 text-sm leading-7 text-ink-700 sm:text-base">
+                        {card.lines.map((line) => (
+                          <p key={line}>{line}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       <Section id="capabilities" className="overflow-hidden">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1fr)]">

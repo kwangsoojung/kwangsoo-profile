@@ -148,6 +148,38 @@ export const kr = {
       ],
     },
   ],
+  handsOn: {
+    title: 'BUILT, RAN, LEARNED',
+    subtitle: '직접 만들고, 운영하고, 배운 것들',
+    body:
+      '회사 프로젝트는 구조를 가르쳐주었고, 직접 운영한 사업은 현실을 가르쳐주었습니다. 프랑스에서 목공 제작과 레지던스 운영을 경험하며, 아이디어가 고객, 비용, 시간, 유지보수, 매일의 판단과 어떻게 만나는지 배웠습니다.',
+    cards: [
+      {
+        title: 'Woodworking Studio Operations',
+        lines: [
+          '맞춤 제작, 소재 검토, 견적, 제작 일정, 납품 후속 관리',
+          '디자인 의도와 실제 제작 조건 사이를 연결한 경험',
+        ],
+        image: {
+          src: '/images/work/woodworking-studio.png',
+          alt: '목공 제작 운영 이미지',
+          fallback: 'Woodworking studio',
+        },
+      },
+      {
+        title: 'Residence & Hospitality Operations',
+        lines: [
+          'Paris Noble Residence 운영: 예약, 고객 응대, 체크인/아웃, 시설 관리와 서비스 품질',
+          '고객 경험, 유지보수, 시간 관리, 운영 책임을 매일 이해한 경험',
+        ],
+        image: {
+          src: '/images/work/residence-operations.png',
+          alt: '레지던스 운영 이미지',
+          fallback: 'Residence operations',
+        },
+      },
+    ],
+  },
   capabilitiesHeading: '감각과 운영을 함께 다루는 실무 범위.',
   capabilities: [
     { title: '제품 커뮤니케이션', note: '제안의 구조' },

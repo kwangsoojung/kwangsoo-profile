@@ -69,6 +69,16 @@ export type ProfileContent = {
     lines: string[];
     logos: ReplaceableAsset[];
   }>;
+  handsOn: {
+    title: string;
+    subtitle: string;
+    body: string;
+    cards: Array<{
+      title: string;
+      lines: string[];
+      image: ReplaceableAsset;
+    }>;
+  };
   narrativeIntro: string;
   capabilitiesHeading: string;
   capabilities: Array<{

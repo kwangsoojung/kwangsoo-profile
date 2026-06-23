@@ -148,6 +148,38 @@ export const fr = {
       ],
     },
   ],
+  handsOn: {
+    title: 'BUILT, RAN, LEARNED',
+    subtitle: 'Créer, gérer, apprendre par le réel',
+    body:
+      'Les projets d’entreprise m’ont appris la structure. L’exploitation d’activités indépendantes m’a appris la réalité du terrain. En France, j’ai géré une activité de fabrication bois ainsi qu’une résidence, avec une compréhension concrète des clients, des coûts, du temps, de la maintenance et des décisions quotidiennes.',
+    cards: [
+      {
+        title: 'Woodworking Studio Operations',
+        lines: [
+          'Fabrication sur mesure, matériaux, devis, délais de production et suivi de livraison',
+          'Un lien concret entre intention design et contraintes réelles de fabrication',
+        ],
+        image: {
+          src: '/images/work/woodworking-studio.png',
+          alt: 'Opérations d’atelier bois',
+          fallback: 'Atelier bois',
+        },
+      },
+      {
+        title: 'Residence & Hospitality Operations',
+        lines: [
+          'Paris Noble Residence : réservations, échanges clients, check-in/out, équipements et qualité de service',
+          'Compréhension quotidienne de l’expérience client, de la maintenance, du timing et de la responsabilité opérationnelle',
+        ],
+        image: {
+          src: '/images/work/residence-operations.png',
+          alt: 'Opérations de résidence et hospitalité',
+          fallback: 'Résidence',
+        },
+      },
+    ],
+  },
   capabilitiesHeading: 'Une pratique opérationnelle, portée par le sens du détail.',
   capabilities: [
     { title: 'Communication produit', note: 'offre claire' },
