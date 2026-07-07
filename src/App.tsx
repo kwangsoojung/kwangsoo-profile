@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -79,6 +79,7 @@ function TitleWithSupport({
 }
 
 function App() {
+  const heroRef = useRef<HTMLElement | null>(null);
   const [language, setLanguage] = useState<LanguageCode>(() => {
     if (typeof window === 'undefined') {
       return 'en';
@@ -115,6 +116,36 @@ function App() {
     window.addEventListener('scroll', updateHeader, { passive: true });
 
     return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
+
+  useEffect(() => {
+    const updateHeroScroll = () => {
+      const hero = heroRef.current;
+
+      if (!hero) {
+        return;
+      }
+
+      if (window.innerWidth <= 900) {
+        hero.style.removeProperty('--scroll-progress');
+        hero.classList.remove('is-scrolled');
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / 300, 0), 1);
+      hero.style.setProperty('--scroll-progress', progress.toFixed(3));
+      hero.classList.toggle('is-scrolled', progress > 0.15);
+    };
+
+    updateHeroScroll();
+    window.addEventListener('scroll', updateHeroScroll, { passive: true });
+    window.addEventListener('resize', updateHeroScroll);
+
+    return () => {
+      window.removeEventListener('scroll', updateHeroScroll);
+      window.removeEventListener('resize', updateHeroScroll);
+    };
   }, []);
 
   function handleCvUnlock(event: FormEvent<HTMLFormElement>) {
@@ -170,15 +201,18 @@ function App() {
         </Container>
       </header>
 
-      <section className="relative overflow-hidden border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
+      <section
+        ref={heroRef}
+        className="hero relative overflow-hidden border-b border-line lg:min-h-[calc(100vh-4rem)]"
+      >
         <Container>
-          <div className="relative">
-            <div className="relative z-30 flex min-h-[36rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[44rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)]">
-              <div className="relative">
+          <div className="hero-inner relative py-16 sm:py-20 lg:min-h-[calc(100vh-4rem)] lg:pb-0 lg:pt-[clamp(4rem,7vw,6rem)]">
+            <div className="hero-content relative z-[6] max-w-[640px] border-l border-line pl-5 sm:pl-8">
+              <div className="relative z-[7]">
                 <p className="text-base font-bold uppercase tracking-[0.18em] text-brand-700 sm:text-lg">
                   {profile.location}
                 </p>
-                <h1 className="relative z-0 mt-12 max-w-none font-display text-[clamp(4.7rem,18vw,14.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] text-ink-950 sm:mt-14 sm:text-[clamp(7rem,18vw,14.5rem)] lg:mt-16 lg:w-[calc(100%+min(20vw,18rem))]">
+                <h1 className="hero-name relative z-[4] mt-12 max-w-none font-display text-[clamp(4.7rem,18vw,14.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] text-ink-950 sm:mt-14 sm:text-[clamp(7rem,18vw,14.5rem)] lg:mt-16 lg:w-[calc(100%+min(20vw,18rem))]">
                   {displayProfile.nameParts.map((part) => (
                     <span key={part} className="block whitespace-nowrap">
                       {part}
@@ -186,11 +220,14 @@ function App() {
                   ))}
                 </h1>
               </div>
-              <HeroVisual
-                className="z-10 mx-auto my-10 lg:absolute lg:bottom-0 lg:right-[clamp(2.5rem,8vw,8.75rem)] lg:my-0 lg:min-h-0 lg:w-[clamp(560px,46vw,780px)]"
-                visual={profile.heroVisual}
-              />
-              <div className="relative z-40 max-w-2xl pt-7">
+            </div>
+
+            <div className="hero-visual-layer pointer-events-none relative z-[5] mx-auto my-10 w-[min(92vw,480px)] lg:absolute lg:bottom-0 lg:right-[clamp(-7rem,-5vw,-2rem)] lg:my-0 lg:w-[clamp(680px,56vw,980px)]">
+              <HeroVisual visual={profile.heroVisual} />
+            </div>
+
+            <div className="hero-copy relative z-[8] max-w-[600px] border-l border-line pl-5 sm:pl-8 lg:mt-10">
+              <div className="max-w-2xl">
                 <div>
                   <p className="max-w-3xl text-2xl font-semibold leading-tight text-brand-700 sm:text-4xl">
                     {displayProfile.discipline}
@@ -204,7 +241,7 @@ function App() {
                     “{profile.quote}”
                   </blockquote>
                 </div>
-                <div className="relative z-50 mt-8 flex flex-wrap items-center gap-3 lg:ml-[clamp(1.5rem,4vw,5rem)]">
+                <div className="hero-actions relative z-[9] mt-8 flex flex-wrap items-center gap-3 lg:ml-[clamp(1.5rem,4vw,5rem)]">
                   <Button href="#profile" variant="primary">
                     {profile.ui.cta.viewProfile}
                     <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
