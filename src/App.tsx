@@ -81,6 +81,7 @@ function TitleWithSupport({
 
 function App() {
   const heroRef = useRef<HTMLElement | null>(null);
+  const positioningRef = useRef<HTMLElement | null>(null);
   const [language, setLanguage] = useState<LanguageCode>(() => {
     if (typeof window === 'undefined') {
       return 'en';
@@ -146,6 +147,39 @@ function App() {
     return () => {
       window.removeEventListener('scroll', updateHeroScroll);
       window.removeEventListener('resize', updateHeroScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updatePositioningMap = () => {
+      const positioning = positioningRef.current;
+
+      if (!positioning) {
+        return;
+      }
+
+      if (window.innerWidth <= 900) {
+        positioning.style.removeProperty('--positioning-map-y');
+        return;
+      }
+
+      const rect = positioning.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const progress = Math.min(
+        Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0),
+        1,
+      );
+      const y = (progress - 0.5) * -40;
+      positioning.style.setProperty('--positioning-map-y', `${y.toFixed(2)}px`);
+    };
+
+    updatePositioningMap();
+    window.addEventListener('scroll', updatePositioningMap, { passive: true });
+    window.addEventListener('resize', updatePositioningMap);
+
+    return () => {
+      window.removeEventListener('scroll', updatePositioningMap);
+      window.removeEventListener('resize', updatePositioningMap);
     };
   }, []);
 
@@ -257,28 +291,31 @@ function App() {
         </Container>
       </section>
 
-      <Section id="profile" className="py-16 sm:py-20 lg:py-28">
+      <section
+        id="profile"
+        ref={positioningRef}
+        className="positioning relative overflow-hidden border-t border-line py-16 sm:py-20 lg:py-28"
+      >
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(18rem,0.58fr)]">
+          <div className="positioning-inner relative z-[3] grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(22.5rem,0.9fr)] lg:gap-[clamp(3rem,7vw,7.5rem)]">
             <div>
-              <Eyebrow>{profile.ui.sections.positioning}</Eyebrow>
-              <h2 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[0.96] tracking-tight text-ink-950 sm:text-7xl">
-                <TitleWithSupport
-                  className="block"
-                  primary={`“${displayProfile.positioningStatement}”`}
-                  support={isKorean ? `“${profile.positioningStatement}”` : undefined}
-                />
-              </h2>
-            </div>
-            <div className="self-end">
-              <p className="max-w-md text-lg leading-8 text-ink-700">{profile.summary}</p>
-              <div className="positioning-map-box relative mt-9 h-64 overflow-hidden border border-line bg-ivory-50/45 p-6 sm:p-8">
+              <div className="positioning-copy relative z-[4]">
+                <Eyebrow>{profile.ui.sections.positioning}</Eyebrow>
+                <h2 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[0.96] tracking-tight text-ink-950 sm:text-7xl">
+                  <TitleWithSupport
+                    className="block"
+                    primary={`“${displayProfile.positioningStatement}”`}
+                    support={isKorean ? `“${profile.positioningStatement}”` : undefined}
+                  />
+                </h2>
+              </div>
+              <div className="positioning-map-bg mt-10" aria-hidden="true">
                 <AssetImage
-                  alt="Korea-France connection map"
-                  className="h-full w-full object-contain"
+                  alt=""
+                  className="h-auto w-full object-contain"
                   fallback={
                     <KoreaFranceMapVisual
-                      className="h-full border-0"
+                      className="h-full min-h-[18rem] border-0 bg-transparent"
                       destinationLabel={profile.mapVisual.destination}
                       originLabel={profile.mapVisual.origin}
                     />
@@ -286,27 +323,35 @@ function App() {
                   src="/images/kr-fr-map-connection.png"
                 />
               </div>
-              <div className="mt-9 grid gap-0 border-t border-line">
-                {profile.pillars.map((pillar, index) => (
-                  <article key={pillar.title} className="border-b border-line py-5">
-                    <h3 className="text-lg font-semibold text-ink-950">
-                      {isKorean ? displayProfile.pillars[index].title : pillar.title}
-                    </h3>
-                    {isKorean ? (
-                      <p className="mt-2 text-sm font-medium leading-6 text-ink-700">
-                        {pillar.title}
+            </div>
+            <div className="positioning-right relative z-[4] self-start lg:pt-3">
+              <p className="positioning-lead max-w-xl text-[clamp(1.375rem,2vw,2rem)] font-medium leading-[1.35] text-ink-950">
+                {profile.summary}
+              </p>
+              <div className="positioning-proof mt-10 grid gap-0 border-t border-line lg:mt-16">
+                {profile.positioningProof.map((item) => (
+                  <article
+                    key={item.title}
+                    className="proof-item grid gap-3 border-b border-line py-7 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-6"
+                  >
+                    <span className="proof-number text-sm font-bold uppercase tracking-[0.16em] text-brand-700 sm:text-lg">
+                      {item.number}
+                    </span>
+                    <div>
+                      <h3 className="text-xl font-semibold leading-tight text-ink-950 sm:text-2xl">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-ink-600 sm:text-base sm:leading-7">
+                        {item.description}
                       </p>
-                    ) : null}
-                    <p className="mt-2 text-sm leading-6 text-ink-500">
-                      {pillar.description}
-                    </p>
+                    </div>
                   </article>
                 ))}
               </div>
             </div>
           </div>
         </Container>
-      </Section>
+      </section>
 
       <Section id="narrative">
         <Container>
