@@ -90,13 +90,13 @@ body::before {
 .positioning-map-bg {
   position: absolute;
   z-index: 1;
-  left: clamp(1.5rem, 5vw, 5.5rem);
-  bottom: clamp(1.5rem, 5vw, 4.5rem);
-  width: clamp(38rem, 58vw, 61rem);
-  opacity: 0.24;
+  left: clamp(2.5rem, 7vw, 7.5rem);
+  bottom: clamp(5rem, 10vw, 10rem);
+  width: clamp(47.5rem, 66vw, 70rem);
+  opacity: 0.42;
   pointer-events: none;
-  transform: translateY(var(--positioning-map-y));
-  transition: transform 120ms linear;
+  transform: translate3d(0, var(--positioning-map-y, 0px), 0);
+  will-change: transform;
 }
 
 .positioning-map-bg img {
@@ -106,9 +106,25 @@ body::before {
   object-fit: contain;
 }
 
-.positioning-proof {
-  background: linear-gradient(90deg, rgba(251, 247, 239, 0.72), rgba(251, 247, 239, 0.28));
-  backdrop-filter: blur(1px);
+.positioning-right,
+.positioning-proof,
+.proof-item,
+.positioning-card,
+.positioning-panel {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.positioning-right::before,
+.positioning-right::after,
+.positioning-proof::before,
+.positioning-proof::after,
+.proof-item::before,
+.proof-item::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 900px) {
@@ -126,15 +142,10 @@ body::before {
     position: relative;
     left: auto;
     bottom: auto;
-    width: min(100%, 32.5rem);
+    width: min(100%, 35rem);
     margin: 2rem auto 0;
-    opacity: 0.32;
-    transform: none;
-  }
-
-  .positioning-proof {
-    background: transparent;
-    backdrop-filter: none;
+    opacity: 0.34;
+    transform: none !important;
   }
 }
 
