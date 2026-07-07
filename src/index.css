@@ -83,6 +83,34 @@ body::before {
   transform: translateY(-20px) scale(0.98);
 }
 
+.positioning {
+  --positioning-map-y: 0px;
+}
+
+.positioning-map-bg {
+  position: absolute;
+  z-index: 1;
+  left: clamp(1.5rem, 5vw, 5.5rem);
+  bottom: clamp(1.5rem, 5vw, 4.5rem);
+  width: clamp(38rem, 58vw, 61rem);
+  opacity: 0.24;
+  pointer-events: none;
+  transform: translateY(var(--positioning-map-y));
+  transition: transform 120ms linear;
+}
+
+.positioning-map-bg img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.positioning-proof {
+  background: linear-gradient(90deg, rgba(251, 247, 239, 0.72), rgba(251, 247, 239, 0.28));
+  backdrop-filter: blur(1px);
+}
+
 @media (max-width: 900px) {
   .hero {
     --scroll-progress: 0;
@@ -92,6 +120,21 @@ body::before {
   .hero-name,
   .hero.is-scrolled .hero-visual-layer {
     transform: none;
+  }
+
+  .positioning-map-bg {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(100%, 32.5rem);
+    margin: 2rem auto 0;
+    opacity: 0.32;
+    transform: none;
+  }
+
+  .positioning-proof {
+    background: transparent;
+    backdrop-filter: none;
   }
 }
 
