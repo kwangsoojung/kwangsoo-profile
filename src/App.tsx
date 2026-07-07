@@ -172,8 +172,8 @@ function App() {
 
       <section className="overflow-hidden border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
         <Container>
-          <div className="relative">
-            <div className="relative z-10 flex min-h-[36rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[44rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)] lg:pr-[min(19vw,16rem)]">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-[clamp(2rem,5vw,5rem)]">
+            <div className="relative z-30 flex min-h-[36rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[44rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)]">
               <div className="relative">
                 <p className="text-base font-bold uppercase tracking-[0.18em] text-brand-700 sm:text-lg">
                   {profile.location}
@@ -211,7 +211,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="pointer-events-none relative z-20 mt-8 lg:absolute lg:right-0 lg:top-8 lg:mt-0 lg:h-[min(62vh,38rem)] lg:w-[min(31vw,25rem)]">
+            <div className="pointer-events-none relative z-20 min-h-[32rem] lg:sticky lg:top-24 lg:min-h-[620px]">
               <HeroVisual visual={profile.heroVisual} />
             </div>
           </div>
