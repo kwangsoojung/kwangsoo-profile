@@ -59,6 +59,42 @@ body::before {
   overflow-wrap: break-word;
 }
 
+.hero {
+  --scroll-progress: 0;
+}
+
+.hero-name {
+  transform: translateY(calc(var(--scroll-progress) * -18px));
+  transition: transform 320ms ease;
+}
+
+.hero-visual-layer {
+  transition:
+    transform 420ms ease,
+    opacity 420ms ease;
+}
+
+.hero.is-scrolled .hero-name {
+  z-index: 10;
+}
+
+.hero.is-scrolled .hero-visual-layer {
+  z-index: 3;
+  transform: translateY(-20px) scale(0.98);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    --scroll-progress: 0;
+    overflow: visible;
+  }
+
+  .hero-name,
+  .hero.is-scrolled .hero-visual-layer {
+    transform: none;
+  }
+}
+
 button,
 input,
 textarea,
