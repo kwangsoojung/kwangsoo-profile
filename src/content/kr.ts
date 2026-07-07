@@ -31,6 +31,26 @@ export const kr = {
     origin: 'KR',
     destination: 'FR',
   },
+  positioningProof: [
+    {
+      number: '750+',
+      title: 'Retail deployment',
+      description:
+        'Fnac, Darty, Carrefour 등 프랑스 주요 리테일 네트워크의 전국 매장 실행을 조율했습니다.',
+    },
+    {
+      number: '3',
+      title: 'Shopify platforms',
+      description:
+        '프랑스, 한국, 일본 시장을 잇는 이커머스 운영 구조를 정리했습니다.',
+    },
+    {
+      number: 'KR · FR',
+      title: 'Cross-market coordination',
+      description:
+        '한국 본사, 프랑스 현지 시장, 공급사와 파트너 사이의 실행 흐름을 연결했습니다.',
+    },
+  ],
   ui: {
     languageSwitcherLabel: '언어',
     languages: [
