@@ -187,10 +187,10 @@ function App() {
                 </h1>
               </div>
               <HeroVisual
-                className="z-10 mx-auto my-10 lg:absolute lg:right-[clamp(-5rem,-4vw,-1.25rem)] lg:top-1/2 lg:my-0 lg:min-h-0 lg:w-[clamp(560px,52vw,860px)] lg:-translate-y-[46%] lg:opacity-80"
+                className="z-10 mx-auto my-10 lg:absolute lg:bottom-0 lg:right-[clamp(2.5rem,8vw,8.75rem)] lg:my-0 lg:min-h-0 lg:w-[clamp(560px,46vw,780px)]"
                 visual={profile.heroVisual}
               />
-              <div className="relative z-40 max-w-2xl border-t border-line pt-7">
+              <div className="relative z-40 max-w-2xl pt-7">
                 <div>
                   <p className="max-w-3xl text-2xl font-semibold leading-tight text-brand-700 sm:text-4xl">
                     {displayProfile.discipline}
@@ -204,7 +204,7 @@ function App() {
                     “{profile.quote}”
                   </blockquote>
                 </div>
-                <div className="relative z-50 mt-8 flex flex-wrap items-center gap-3">
+                <div className="relative z-50 mt-8 flex flex-wrap items-center gap-3 lg:ml-[clamp(1.5rem,4vw,5rem)]">
                   <Button href="#profile" variant="primary">
                     {profile.ui.cta.viewProfile}
                     <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
