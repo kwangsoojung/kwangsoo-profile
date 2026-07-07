@@ -31,6 +31,26 @@ export const fr = {
     origin: 'KR',
     destination: 'FR',
   },
+  positioningProof: [
+    {
+      number: '750+',
+      title: 'Déploiement retail',
+      description:
+        'Coordination de l’exécution nationale en magasin auprès de réseaux comme Fnac, Darty, Carrefour et autres enseignes.',
+    },
+    {
+      number: '3',
+      title: 'Plateformes Shopify',
+      description:
+        'Structuration des opérations e-commerce entre la France, la Corée et le Japon.',
+    },
+    {
+      number: 'KR · FR',
+      title: 'Coordination multi-marchés',
+      description:
+        'Faire le lien entre siège coréen, besoins du marché français, fournisseurs et partenaires locaux.',
+    },
+  ],
   ui: {
     languageSwitcherLabel: 'Langue',
     languages: [
