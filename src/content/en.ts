@@ -31,6 +31,26 @@ export const en = {
     origin: 'KR',
     destination: 'FR',
   },
+  positioningProof: [
+    {
+      number: '750+',
+      title: 'Retail deployment',
+      description:
+        'Coordinating national in-store execution across Fnac, Darty, Carrefour and other retail networks.',
+    },
+    {
+      number: '3',
+      title: 'Shopify platforms',
+      description:
+        'Structuring e-commerce operations across France, Korea and Japan.',
+    },
+    {
+      number: 'KR · FR',
+      title: 'Cross-market coordination',
+      description:
+        'Bridging Korean headquarters, French market needs, suppliers and local partners.',
+    },
+  ],
   ui: {
     languageSwitcherLabel: 'Language',
     languages: [
