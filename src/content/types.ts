@@ -31,6 +31,11 @@ export type ProfileContent = {
     origin: string;
     destination: string;
   };
+  positioningProof: Array<{
+    number: string;
+    title: string;
+    description: string;
+  }>;
   ui: {
     languageSwitcherLabel: string;
     languages: LanguageOption[];
