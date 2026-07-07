@@ -9,7 +9,7 @@ type HeroVisualProps = {
 export function HeroVisual({ className = '', visual }: HeroVisualProps) {
   return (
     <div
-      className={`hero-visual pointer-events-none relative flex min-h-[28rem] items-end justify-center overflow-visible bg-transparent sm:min-h-[34rem] ${className}`}
+      className={`hero-visual pointer-events-none relative overflow-visible bg-transparent ${className}`}
     >
       <AssetImage
         alt={visual.background.alt}
@@ -19,9 +19,9 @@ export function HeroVisual({ className = '', visual }: HeroVisualProps) {
       />
       <AssetImage
         alt={visual.portrait.alt}
-        className="hero-portrait relative z-20 block h-auto w-[min(92vw,480px)] max-w-none object-contain opacity-100 sm:w-[clamp(420px,42vw,720px)] lg:w-[clamp(560px,46vw,780px)]"
+        className="hero-main-visual hero-portrait relative z-20 block h-auto w-full max-w-none object-contain opacity-100"
         fallback={
-          <div className="relative z-20 flex h-[min(58vw,460px)] w-[min(92vw,480px)] items-center justify-center border border-dashed border-line bg-ivory-50/45 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-500 sm:w-[clamp(420px,42vw,720px)] lg:w-[clamp(560px,52vw,860px)]">
+          <div className="relative z-20 flex aspect-[4/5] w-full items-center justify-center border border-dashed border-line bg-ivory-50/45 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-500">
             {visual.portrait.fallback}
           </div>
         }
