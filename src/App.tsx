@@ -159,7 +159,7 @@ function App() {
       }
 
       if (window.innerWidth <= 900) {
-        positioning.style.removeProperty('--positioning-map-y');
+        positioning.style.setProperty('--positioning-map-y', '0px');
         return;
       }
 
@@ -169,7 +169,7 @@ function App() {
         Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0),
         1,
       );
-      const y = (progress - 0.5) * -40;
+      const y = (progress - 0.5) * -80;
       positioning.style.setProperty('--positioning-map-y', `${y.toFixed(2)}px`);
     };
 
@@ -309,7 +309,7 @@ function App() {
                   />
                 </h2>
               </div>
-              <div className="positioning-map-bg mt-10" aria-hidden="true">
+              <div className="positioning-map-bg" aria-hidden="true">
                 <AssetImage
                   alt=""
                   className="h-auto w-full object-contain"
