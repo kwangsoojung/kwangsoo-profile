@@ -186,7 +186,7 @@ function App() {
                   ))}
                 </h1>
               </div>
-              <div className="grid gap-7 border-t border-line pt-7 lg:grid-cols-[minmax(0,1fr)_18rem]">
+              <div className="relative z-40 grid gap-7 border-t border-line pt-7 lg:grid-cols-[minmax(0,1fr)_18rem]">
                 <div>
                   <p className="max-w-3xl text-2xl font-semibold leading-tight text-brand-700 sm:text-4xl">
                     {displayProfile.discipline}
@@ -200,7 +200,7 @@ function App() {
                     “{profile.quote}”
                   </blockquote>
                 </div>
-                <div className="flex flex-wrap items-end gap-3 lg:justify-end">
+                <div className="relative z-50 flex flex-wrap items-end gap-3 lg:justify-end">
                   <Button href="#profile" variant="primary">
                     {profile.ui.cta.viewProfile}
                     <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -211,7 +211,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="pointer-events-none relative z-20 mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:top-4 lg:mt-0 lg:w-[min(34vw,28rem)]">
+            <div className="pointer-events-none relative z-20 mt-8 lg:absolute lg:right-0 lg:top-8 lg:mt-0 lg:h-[min(62vh,38rem)] lg:w-[min(31vw,25rem)]">
               <HeroVisual visual={profile.heroVisual} />
             </div>
           </div>
