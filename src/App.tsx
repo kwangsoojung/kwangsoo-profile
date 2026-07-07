@@ -170,9 +170,9 @@ function App() {
         </Container>
       </header>
 
-      <section className="overflow-hidden border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
+      <section className="relative overflow-hidden border-b border-line py-10 sm:py-14 lg:min-h-[calc(100vh-4rem)] lg:py-12">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-[clamp(2rem,5vw,5rem)]">
+          <div className="relative">
             <div className="relative z-30 flex min-h-[36rem] flex-col justify-between border-l border-line pl-5 sm:min-h-[44rem] sm:pl-8 lg:min-h-[calc(100vh-10rem)]">
               <div className="relative">
                 <p className="text-base font-bold uppercase tracking-[0.18em] text-brand-700 sm:text-lg">
@@ -186,7 +186,11 @@ function App() {
                   ))}
                 </h1>
               </div>
-              <div className="relative z-40 grid gap-7 border-t border-line pt-7 lg:grid-cols-[minmax(0,1fr)_18rem]">
+              <HeroVisual
+                className="z-10 mx-auto my-10 lg:absolute lg:right-[clamp(-5rem,-4vw,-1.25rem)] lg:top-1/2 lg:my-0 lg:min-h-0 lg:w-[clamp(560px,52vw,860px)] lg:-translate-y-[46%] lg:opacity-80"
+                visual={profile.heroVisual}
+              />
+              <div className="relative z-40 max-w-2xl border-t border-line pt-7">
                 <div>
                   <p className="max-w-3xl text-2xl font-semibold leading-tight text-brand-700 sm:text-4xl">
                     {displayProfile.discipline}
@@ -200,7 +204,7 @@ function App() {
                     “{profile.quote}”
                   </blockquote>
                 </div>
-                <div className="relative z-50 flex flex-wrap items-end gap-3 lg:justify-end">
+                <div className="relative z-50 mt-8 flex flex-wrap items-center gap-3">
                   <Button href="#profile" variant="primary">
                     {profile.ui.cta.viewProfile}
                     <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -210,9 +214,6 @@ function App() {
                   </Button>
                 </div>
               </div>
-            </div>
-            <div className="pointer-events-none relative z-20 min-h-[32rem] lg:sticky lg:top-24 lg:min-h-[620px]">
-              <HeroVisual visual={profile.heroVisual} />
             </div>
           </div>
         </Container>
