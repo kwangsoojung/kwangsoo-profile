@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   Store,
 } from 'lucide-react';
+import { AssetImage } from './components/AssetImage';
 import { Button } from './components/Button';
 import { Container } from './components/Container';
 import { Eyebrow } from './components/Eyebrow';
@@ -271,11 +272,20 @@ function App() {
             </div>
             <div className="self-end">
               <p className="max-w-md text-lg leading-8 text-ink-700">{profile.summary}</p>
-              <KoreaFranceMapVisual
-                className="mt-9 h-64"
-                destinationLabel={profile.mapVisual.destination}
-                originLabel={profile.mapVisual.origin}
-              />
+              <div className="positioning-map-box relative mt-9 h-64 overflow-hidden border border-line bg-ivory-50/45 p-6 sm:p-8">
+                <AssetImage
+                  alt="Korea-France connection map"
+                  className="h-full w-full object-contain"
+                  fallback={
+                    <KoreaFranceMapVisual
+                      className="h-full border-0"
+                      destinationLabel={profile.mapVisual.destination}
+                      originLabel={profile.mapVisual.origin}
+                    />
+                  }
+                  src="/images/kr-fr-map-connection.png"
+                />
+              </div>
               <div className="mt-9 grid gap-0 border-t border-line">
                 {profile.pillars.map((pillar, index) => (
                   <article key={pillar.title} className="border-b border-line py-5">
