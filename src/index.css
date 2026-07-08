@@ -128,6 +128,45 @@ body::before {
   box-shadow: none !important;
 }
 
+.journey-preview {
+  position: absolute;
+  z-index: 4;
+  right: clamp(2.5rem, 7vw, 7.5rem);
+  top: clamp(7.5rem, 14vw, 13.75rem);
+  width: clamp(20rem, 30vw, 32.5rem);
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(9, 8, 7, 0.12);
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease;
+}
+
+.journey-preview.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.journey-preview-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journey-grid {
+  position: relative;
+  z-index: 3;
+}
+
+.journey-company:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
 @media (max-width: 900px) {
   .hero {
     --scroll-progress: 0;
@@ -148,6 +187,16 @@ body::before {
     margin: 0;
     opacity: 0.32;
     transform: translate3d(-50%, 0, 0) !important;
+  }
+}
+
+@media (max-width: 999px) {
+  .journey-preview {
+    display: none;
+  }
+
+  .journey-card:last-child {
+    border-bottom: 0;
   }
 }
 
