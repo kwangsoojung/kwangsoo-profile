@@ -154,7 +154,7 @@ export const en = {
     },
     {
       number: '04',
-      title: 'Retail Marketing & Product Communication',
+      title: 'Retail Marketing & Product Launch',
       company: 'HSAD-GIIR / LG-related projects',
       lines: [
         'Connected launch stories with display systems.',
