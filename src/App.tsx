@@ -42,22 +42,22 @@ const contentByLanguage: Record<LanguageCode, ProfileContent> = { en, fr, kr };
 const journeyGalleries = [
   {
     id: 'emons',
-    preview: '/images/parcours/emons-01.jpg',
+    images: ['/images/parcours/emons-01.jpg', '/images/parcours/emons-02.jpg'],
     fallback: 'EMONS / LBF',
   },
   {
     id: 'orcom',
-    preview: '/images/parcours/orcom-01.jpg',
+    images: ['/images/parcours/orcom-01.jpg', '/images/parcours/orcom-02.jpg'],
     fallback: 'ORCOM EUROPE',
   },
   {
     id: 'ace-food',
-    preview: '/images/parcours/ace-food-01.jpg',
+    images: ['/images/parcours/ace-food-01.jpg', '/images/parcours/ace-food-02.jpg'],
     fallback: 'ACE FOOD',
   },
   {
     id: 'hsad-giir',
-    preview: '/images/parcours/hsad-giir-01.jpg',
+    images: ['/images/parcours/hsad-giir-01.jpg', '/images/parcours/hsad-giir-02.jpg'],
     fallback: 'HSAD-GIIR / LG',
   },
 ];
@@ -119,8 +119,6 @@ function App() {
   const profile = contentByLanguage[language];
   const isKorean = language === 'kr';
   const displayProfile = isKorean ? en : profile;
-  const activeJourneyPreview =
-    activeJourneyIndex === null ? null : journeyGalleries[activeJourneyIndex];
 
   useEffect(() => {
     window.localStorage.setItem(languageStorageKey, language);
@@ -212,6 +210,11 @@ function App() {
     }
 
     setCvAccessError(true);
+  }
+
+  function handleJourneyGalleryClick(gallery: (typeof journeyGalleries)[number]) {
+    // Gallery modal hook: these image paths are ready for a future modal/carousel.
+    console.info('Open gallery later:', gallery.id, gallery.images);
   }
 
   return (
@@ -391,36 +394,19 @@ function App() {
               </p>
             </div>
 
-            <div
-              className={`journey-preview ${
-                activeJourneyPreview ? 'is-visible' : ''
-              }`}
-              aria-hidden="true"
-            >
-              <AssetImage
-                alt=""
-                className="journey-preview-image"
-                fallback={
-                  <div className="flex h-full w-full items-center justify-center bg-ivory-100/45 px-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-500">
-                    {activeJourneyPreview?.fallback ?? 'Preview pending'}
-                  </div>
-                }
-                src={activeJourneyPreview?.preview ?? '/images/parcours/placeholder.jpg'}
-              />
-            </div>
-
-            <div
-              className="journey-grid mt-14 grid border-t border-line min-[1000px]:grid-cols-4"
-              onMouseLeave={() => setActiveJourneyIndex(null)}
-            >
+            <div className="journey-grid mt-14 grid border-t border-line min-[1000px]:grid-cols-4">
               {profile.chapters.map((chapter, index) => {
                 const gallery = journeyGalleries[index];
+                const previewImage = gallery.images[0];
 
                 return (
                   <article
                     key={chapter.number}
-                    className="journey-card relative border-b border-line py-8 min-[1000px]:min-h-[22.5rem] min-[1000px]:border-b-0 min-[1000px]:border-r min-[1000px]:px-7 min-[1000px]:last:border-r-0"
+                    className={`journey-card journey-card--0${index + 1} ${
+                      activeJourneyIndex === index ? 'is-preview-visible' : ''
+                    } relative overflow-visible border-b border-line py-8 min-[1000px]:min-h-[22.5rem] min-[1000px]:border-b-0 min-[1000px]:border-r min-[1000px]:px-7 min-[1000px]:last:border-r-0`}
                     data-gallery={gallery.id}
+                    data-gallery-images={gallery.images.join(',')}
                   >
                     <span className="journey-number block font-display text-6xl font-medium leading-none text-brand-700 min-[1000px]:mb-12 min-[1000px]:text-[clamp(3.25rem,5vw,4.5rem)]">
                       {chapter.number}
@@ -428,14 +414,30 @@ function App() {
                     <button
                       aria-label={`Preview ${chapter.company}`}
                       className="journey-company mt-8 inline-block border-0 bg-transparent p-0 text-left text-xs font-bold uppercase tracking-[0.22em] text-brand-700 transition-colors hover:text-ink-950 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand-700 min-[1000px]:mt-0"
-                      data-preview={gallery.preview}
+                      data-gallery={gallery.id}
+                      data-gallery-images={gallery.images.join(',')}
+                      data-preview={previewImage}
                       onBlur={() => setActiveJourneyIndex(null)}
+                      onClick={() => handleJourneyGalleryClick(gallery)}
                       onFocus={() => setActiveJourneyIndex(index)}
                       onMouseEnter={() => setActiveJourneyIndex(index)}
+                      onMouseLeave={() => setActiveJourneyIndex(null)}
                       type="button"
                     >
                       {chapter.company}
                     </button>
+                    <div className="journey-local-preview" aria-hidden="true">
+                      <AssetImage
+                        alt=""
+                        className="journey-local-preview-image"
+                        fallback={
+                          <div className="flex h-full w-full items-center justify-center bg-ivory-100/70 px-6 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-500">
+                            {gallery.fallback}
+                          </div>
+                        }
+                        src={previewImage}
+                      />
+                    </div>
                     <h3 className="mt-6 font-display text-3xl font-medium leading-[1.05] text-ink-950 min-[1000px]:text-[clamp(1.7rem,2.6vw,2.35rem)]">
                       <TitleWithSupport
                         className="block"
