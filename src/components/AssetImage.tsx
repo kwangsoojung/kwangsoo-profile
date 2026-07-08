@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 type AssetImageProps = {
   alt: string;
@@ -16,6 +16,10 @@ export function AssetImage({
   src,
 }: AssetImageProps) {
   const [isMissing, setIsMissing] = useState(false);
+
+  useEffect(() => {
+    setIsMissing(false);
+  }, [src]);
 
   if (isMissing) {
     return <>{fallback}</>;
