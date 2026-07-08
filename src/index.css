@@ -90,12 +90,13 @@ body::before {
 .positioning-map-bg {
   position: absolute;
   z-index: 1;
-  left: clamp(2.5rem, 7vw, 7.5rem);
-  bottom: clamp(5rem, 10vw, 10rem);
-  width: clamp(47.5rem, 66vw, 70rem);
-  opacity: 0.42;
+  left: 50%;
+  top: 52%;
+  bottom: auto;
+  width: clamp(980px, 82vw, 1480px);
+  opacity: 0.56;
   pointer-events: none;
-  transform: translate3d(0, var(--positioning-map-y, 0px), 0);
+  transform: translate3d(-50%, calc(-50% + var(--positioning-map-y, 0px)), 0);
   will-change: transform;
 }
 
@@ -139,13 +140,14 @@ body::before {
   }
 
   .positioning-map-bg {
-    position: relative;
-    left: auto;
+    position: absolute;
+    left: 50%;
+    top: 42%;
     bottom: auto;
-    width: min(100%, 35rem);
-    margin: 2rem auto 0;
-    opacity: 0.34;
-    transform: none !important;
+    width: 130vw;
+    margin: 0;
+    opacity: 0.32;
+    transform: translate3d(-50%, 0, 0) !important;
   }
 }
 
