@@ -105,7 +105,7 @@ export const fr = {
       company: 'EMONS / LBF',
       lines: [
         'Transformer des concepts en gammes concrètes.',
-        'Tenir ensemble matériaux, sourcing et usages quotidiens.',
+        'Relier matériaux, sourcing et usages quotidiens.',
       ],
       logos: [
         {
@@ -123,10 +123,10 @@ export const fr = {
     {
       number: '02',
       title: 'Achats & opérations marché France',
-      company: 'ORCOM Europe',
+      company: 'ORCOM EUROPE',
       lines: [
-        'Faire le lien entre besoins locaux et réseaux fournisseurs.',
-        'Rendre la distance, la langue et le timing plus simples.',
+        'Faire le lien entre besoins locaux, réseaux fournisseurs et contraintes de timing.',
+        'Simplifier la distance, la langue et l’exécution.',
       ],
       logos: [
         {
@@ -141,8 +141,8 @@ export const fr = {
       title: 'E-commerce & opérations de marque',
       company: 'ACE FOOD',
       lines: [
-        'Clarifier la boutique, le catalogue et les contenus.',
-        'Aider la marque à rester cohérente dans l’achat en ligne.',
+        'Structurer catalogues, contenus et opérations Shopify.',
+        'Maintenir la cohérence de marque entre France, Corée et Japon.',
       ],
       logos: [
         {
@@ -155,10 +155,10 @@ export const fr = {
     {
       number: '04',
       title: 'Marketing retail & communication produit',
-      company: 'HSAD-GIIR / projets liés à LG',
+      company: 'HSAD-GIIR / LG Projects',
       lines: [
-        'Relier récits de lancement et dispositifs de présentation.',
-        'Travailler près des partenaires de production et du terrain.',
+        'Déployer les dispositifs retail sur le terrain.',
+        'Relier lancements, PLV, partenaires et réseaux de vente.',
       ],
       logos: [
         {
