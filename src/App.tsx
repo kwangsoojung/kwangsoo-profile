@@ -169,7 +169,7 @@ function App() {
         Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0),
         1,
       );
-      const y = (progress - 0.5) * -80;
+      const y = (progress - 0.5) * -90;
       positioning.style.setProperty('--positioning-map-y', `${y.toFixed(2)}px`);
     };
 
