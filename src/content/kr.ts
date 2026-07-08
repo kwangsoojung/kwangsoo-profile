@@ -184,7 +184,7 @@ export const kr = {
           '디자인 의도와 실제 제작 조건 사이를 연결한 경험',
         ],
         image: {
-          src: '/images/work/woodworking-studio.png',
+          src: '/images/operations/woodworking-01.jpg',
           alt: '목공 제작 운영 이미지',
           fallback: 'Woodworking studio',
         },
@@ -197,7 +197,7 @@ export const kr = {
           '고객 경험, 유지보수, 시간 관리, 운영 책임을 매일 이해한 경험',
         ],
         image: {
-          src: '/images/work/residence-operations.png',
+          src: '/images/operations/residence-01.jpg',
           alt: '레지던스 운영 이미지',
           fallback: 'Residence operations',
         },

@@ -184,7 +184,7 @@ export const en = {
           'A practical bridge between design intention and real workshop constraints',
         ],
         image: {
-          src: '/images/work/woodworking-studio.png',
+          src: '/images/operations/woodworking-01.jpg',
           alt: 'Woodworking studio operations',
           fallback: 'Woodworking studio',
         },
@@ -196,7 +196,7 @@ export const en = {
           'Daily understanding of customer experience, maintenance, timing and operational responsibility',
         ],
         image: {
-          src: '/images/work/residence-operations.png',
+          src: '/images/operations/residence-01.jpg',
           alt: 'Residence and hospitality operations',
           fallback: 'Residence operations',
         },

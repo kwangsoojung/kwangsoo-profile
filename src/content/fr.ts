@@ -184,7 +184,7 @@ export const fr = {
           'Une expérience concrète entre intention design et contraintes réelles d’atelier',
         ],
         image: {
-          src: '/images/work/woodworking-studio.png',
+          src: '/images/operations/woodworking-01.jpg',
           alt: 'Opérations d’atelier bois',
           fallback: 'Atelier bois',
         },
@@ -197,7 +197,7 @@ export const fr = {
           'Compréhension quotidienne de l’expérience client, de la maintenance, du timing et de la responsabilité opérationnelle',
         ],
         image: {
-          src: '/images/work/residence-operations.png',
+          src: '/images/operations/residence-01.jpg',
           alt: 'Opérations de résidence et hospitalité',
           fallback: 'Résidence',
         },

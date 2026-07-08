@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -65,6 +65,12 @@ const cvAccessCode = 'JKS2026';
 const cvUnlockStorageKey = 'kwangsoo-cv-unlocked';
 const languageStorageKey = 'kwangsoo-profile-language';
 
+type ImageModalState = {
+  images: string[];
+  index: number;
+  label: string;
+};
+
 function isLanguageCode(value: string | null): value is LanguageCode {
   return value === 'en' || value === 'fr' || value === 'kr';
 }
@@ -108,6 +114,7 @@ function App() {
   const [cvAccessError, setCvAccessError] = useState(false);
   const [cvCode, setCvCode] = useState('');
   const [activeJourneyIndex, setActiveJourneyIndex] = useState<number | null>(null);
+  const [imageModal, setImageModal] = useState<ImageModalState | null>(null);
   const [isCvUnlocked, setIsCvUnlocked] = useState(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -119,6 +126,8 @@ function App() {
   const profile = contentByLanguage[language];
   const isKorean = language === 'kr';
   const displayProfile = isKorean ? en : profile;
+  const isImageModalOpen = Boolean(imageModal);
+  const currentModalImage = imageModal?.images[imageModal.index];
 
   useEffect(() => {
     window.localStorage.setItem(languageStorageKey, language);
@@ -199,6 +208,36 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isImageModalOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeImageModal();
+      }
+
+      if (event.key === 'ArrowLeft') {
+        showPreviousModalImage();
+      }
+
+      if (event.key === 'ArrowRight') {
+        showNextModalImage();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isImageModalOpen]);
+
   function handleCvUnlock(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -212,9 +251,61 @@ function App() {
     setCvAccessError(true);
   }
 
-  function handleJourneyGalleryClick(gallery: (typeof journeyGalleries)[number]) {
-    // Gallery modal hook: these image paths are ready for a future modal/carousel.
-    console.info('Open gallery later:', gallery.id, gallery.images);
+  function openImageModal(images: string[], label: string, startIndex = 0) {
+    const cleanImages = images.map((src) => src.trim()).filter(Boolean);
+
+    if (cleanImages.length === 0) {
+      return;
+    }
+
+    setImageModal({
+      images: cleanImages,
+      index: Math.min(Math.max(startIndex, 0), cleanImages.length - 1),
+      label,
+    });
+  }
+
+  function closeImageModal() {
+    setImageModal(null);
+  }
+
+  function showPreviousModalImage() {
+    setImageModal((modal) => {
+      if (!modal || modal.images.length <= 1) {
+        return modal;
+      }
+
+      return {
+        ...modal,
+        index: (modal.index - 1 + modal.images.length) % modal.images.length,
+      };
+    });
+  }
+
+  function showNextModalImage() {
+    setImageModal((modal) => {
+      if (!modal || modal.images.length <= 1) {
+        return modal;
+      }
+
+      return {
+        ...modal,
+        index: (modal.index + 1) % modal.images.length,
+      };
+    });
+  }
+
+  function handleGalleryTriggerClick(
+    event: MouseEvent<HTMLElement>,
+    label: string,
+  ) {
+    const images =
+      event.currentTarget.dataset.galleryImages
+        ?.split(',')
+        .map((src) => src.trim())
+        .filter(Boolean) ?? [];
+
+    openImageModal(images, label);
   }
 
   return (
@@ -418,7 +509,7 @@ function App() {
                       data-gallery-images={gallery.images.join(',')}
                       data-preview={previewImage}
                       onBlur={() => setActiveJourneyIndex(null)}
-                      onClick={() => handleJourneyGalleryClick(gallery)}
+                      onClick={(event) => handleGalleryTriggerClick(event, gallery.fallback)}
                       onFocus={() => setActiveJourneyIndex(index)}
                       onMouseEnter={() => setActiveJourneyIndex(index)}
                       onMouseLeave={() => setActiveJourneyIndex(null)}
@@ -488,13 +579,23 @@ function App() {
               </div>
               <div className="mt-10 grid gap-6 md:grid-cols-2">
                 {profile.handsOn.cards.map((card, index) => (
-                  <article key={card.title} className="border-t border-line pt-6">
-                    {/* Replace these files manually in /public/images/work when real business images are ready. */}
-                    <WorkImageVisual
-                      asset={card.image}
-                      className="h-56 bg-ivory-50/30"
-                      fallback={
-                        <div className="relative h-full overflow-hidden bg-ivory-100/25">
+                  <article
+                    key={card.title}
+                    className="operations-card border-t border-line pt-6"
+                  >
+                    <button
+                      aria-label={`Open ${card.title} image`}
+                      className="operations-image-button"
+                      data-gallery-images={card.image.src}
+                      onClick={(event) => handleGalleryTriggerClick(event, card.title)}
+                      type="button"
+                    >
+                      {/* Replace these files manually in /public/images/operations when real business images are ready. */}
+                      <AssetImage
+                        alt={card.image.alt}
+                        className="operations-image"
+                        fallback={
+                          <div className="relative h-full overflow-hidden bg-ivory-100/25">
                           <div className="absolute inset-0 bg-[linear-gradient(rgba(9,8,7,.07)_1px,transparent_1px),linear-gradient(90deg,rgba(9,8,7,.07)_1px,transparent_1px)] bg-[size:28px_28px]" />
                           <div className="absolute left-6 top-6 font-display text-5xl font-medium text-brand-700">
                             {index + 1}
@@ -503,8 +604,10 @@ function App() {
                           <div className="absolute bottom-14 right-8 h-px w-36 rotate-[-18deg] bg-brand-700" />
                           <div className="absolute right-10 top-8 h-24 w-20 rounded-full border border-ink-950/20" />
                         </div>
-                      }
-                    />
+                        }
+                        src={card.image.src}
+                      />
+                    </button>
                     <div className="pt-6">
                       <h3 className="font-display text-3xl font-medium leading-tight text-ink-950">
                         <TitleWithSupport
@@ -753,6 +856,69 @@ function App() {
           </div>
         </Container>
       </Section>
+
+      <div
+        aria-hidden={!imageModal}
+        className={`image-modal ${imageModal ? 'is-open' : ''}`}
+      >
+        <button
+          aria-label="Close image gallery"
+          className="image-modal__backdrop"
+          data-modal-close
+          onClick={closeImageModal}
+          type="button"
+        />
+        <div
+          aria-modal="true"
+          className="image-modal__dialog"
+          role="dialog"
+        >
+          <button
+            aria-label="Close image gallery"
+            className="image-modal__close"
+            data-modal-close
+            onClick={closeImageModal}
+            type="button"
+          >
+            ×
+          </button>
+          <button
+            aria-label="Previous image"
+            className={`image-modal__nav image-modal__nav--prev ${
+              imageModal && imageModal.images.length > 1 ? '' : 'is-hidden'
+            }`}
+            onClick={showPreviousModalImage}
+            type="button"
+          >
+            ‹
+          </button>
+          <AssetImage
+            alt={imageModal?.label ?? ''}
+            className="image-modal__image"
+            fallback={
+              <div className="image-modal__fallback">
+                {imageModal?.label ?? 'Image pending'}
+              </div>
+            }
+            src={currentModalImage ?? ''}
+          />
+          <button
+            aria-label="Next image"
+            className={`image-modal__nav image-modal__nav--next ${
+              imageModal && imageModal.images.length > 1 ? '' : 'is-hidden'
+            }`}
+            onClick={showNextModalImage}
+            type="button"
+          >
+            ›
+          </button>
+          <div className="image-modal__count">
+            {imageModal && imageModal.images.length > 1
+              ? `${imageModal.index + 1} / ${imageModal.images.length}`
+              : ''}
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
