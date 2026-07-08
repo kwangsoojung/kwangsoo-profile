@@ -128,43 +128,82 @@ body::before {
   box-shadow: none !important;
 }
 
-.journey-preview {
+.journey-grid {
+  position: relative;
+  z-index: 3;
+}
+
+.journey-card {
+  word-break: normal;
+}
+
+.journey-company:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
+.journey-local-preview {
   position: absolute;
-  z-index: 4;
-  right: clamp(2.5rem, 7vw, 7.5rem);
-  top: clamp(7.5rem, 14vw, 13.75rem);
-  width: clamp(20rem, 30vw, 32.5rem);
+  z-index: 20;
+  width: clamp(13.75rem, 18vw, 21.25rem);
   aspect-ratio: 4 / 3;
-  border: 1px solid rgba(9, 8, 7, 0.12);
+  border: 1px solid rgba(9, 8, 7, 0.14);
+  background: rgba(248, 244, 236, 0.92);
   opacity: 0;
   overflow: hidden;
   pointer-events: none;
-  transform: translateY(12px);
+  transform: translateY(12px) scale(0.98);
   transition:
-    opacity 350ms ease,
-    transform 350ms ease;
+    opacity 280ms ease,
+    visibility 280ms ease,
+    transform 280ms ease;
+  visibility: hidden;
 }
 
-.journey-preview.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.journey-preview-image {
+.journey-local-preview-image {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.journey-grid {
-  position: relative;
-  z-index: 3;
+.journey-card.is-preview-visible .journey-local-preview {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
 }
 
-.journey-company:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.35em;
+.journey-card--01 .journey-local-preview {
+  left: 0.75rem;
+  top: 5.5rem;
+}
+
+.journey-card--02 .journey-local-preview {
+  left: 1.5rem;
+  top: 6.5rem;
+}
+
+.journey-card--03 .journey-local-preview {
+  right: 0.75rem;
+  top: 5.5rem;
+}
+
+.journey-card--04 .journey-local-preview {
+  right: 1rem;
+  top: 6.5rem;
+}
+
+.journey-card h3,
+.journey-card h3 * {
+  hyphens: none;
+  line-height: 1.08;
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.journey-card h3 br {
+  display: none;
 }
 
 @media (max-width: 900px) {
@@ -191,12 +230,18 @@ body::before {
 }
 
 @media (max-width: 999px) {
-  .journey-preview {
+  .journey-local-preview {
     display: none;
   }
 
   .journey-card:last-child {
     border-bottom: 0;
+  }
+
+  .journey-card h3,
+  .journey-card h3 * {
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 }
 
