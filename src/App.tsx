@@ -17,7 +17,6 @@ import { Button } from './components/Button';
 import { Container } from './components/Container';
 import { Eyebrow } from './components/Eyebrow';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-import { LogoImage } from './components/LogoImage';
 import { Section } from './components/Section';
 import {
   EcommerceInterfaceVisual,
@@ -33,12 +32,6 @@ import { kr } from './content/kr';
 import type { LanguageCode, ProfileContent } from './content/types';
 
 const capabilityIcons = [PenLine, Store, Boxes, ShoppingBag, Route, ArrowUpRight];
-const chapterVisuals = [
-  ProductSketchVisual,
-  KoreaFranceMapVisual,
-  EcommerceInterfaceVisual,
-  RetailGridVisual,
-];
 const workVisuals = [
   RetailGridVisual,
   EcommerceInterfaceVisual,
@@ -46,6 +39,28 @@ const workVisuals = [
   KoreaFranceMapVisual,
 ];
 const contentByLanguage: Record<LanguageCode, ProfileContent> = { en, fr, kr };
+const journeyGalleries = [
+  {
+    id: 'emons',
+    preview: '/images/parcours/emons-01.jpg',
+    fallback: 'EMONS / LBF',
+  },
+  {
+    id: 'orcom',
+    preview: '/images/parcours/orcom-01.jpg',
+    fallback: 'ORCOM EUROPE',
+  },
+  {
+    id: 'ace-food',
+    preview: '/images/parcours/ace-food-01.jpg',
+    fallback: 'ACE FOOD',
+  },
+  {
+    id: 'hsad-giir',
+    preview: '/images/parcours/hsad-giir-01.jpg',
+    fallback: 'HSAD-GIIR / LG',
+  },
+];
 const cvAccessCode = 'JKS2026';
 const cvUnlockStorageKey = 'kwangsoo-cv-unlocked';
 const languageStorageKey = 'kwangsoo-profile-language';
@@ -92,6 +107,7 @@ function App() {
   });
   const [cvAccessError, setCvAccessError] = useState(false);
   const [cvCode, setCvCode] = useState('');
+  const [activeJourneyIndex, setActiveJourneyIndex] = useState<number | null>(null);
   const [isCvUnlocked, setIsCvUnlocked] = useState(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -103,6 +119,8 @@ function App() {
   const profile = contentByLanguage[language];
   const isKorean = language === 'kr';
   const displayProfile = isKorean ? en : profile;
+  const activeJourneyPreview =
+    activeJourneyIndex === null ? null : journeyGalleries[activeJourneyIndex];
 
   useEffect(() => {
     window.localStorage.setItem(languageStorageKey, language);
@@ -353,12 +371,17 @@ function App() {
         </Container>
       </section>
 
-      <Section id="narrative">
+      <Section
+        id="narrative"
+        className="journey relative overflow-hidden"
+      >
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
-            <div>
-              <Eyebrow>{profile.ui.sections.narrative}</Eyebrow>
-              <p className="mt-6 max-w-xs font-display text-3xl font-medium leading-tight text-ink-950">
+          <div className="journey-inner relative">
+            <div className="journey-intro grid gap-8 lg:grid-cols-[17.5rem_minmax(0,1fr)] lg:gap-[clamp(3rem,8vw,7.5rem)]">
+              <div>
+                <Eyebrow>{profile.ui.sections.narrative}</Eyebrow>
+              </div>
+              <p className="max-w-xl font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
                 <TitleWithSupport
                   className="block"
                   primary={displayProfile.narrativeIntro}
@@ -367,49 +390,65 @@ function App() {
                 />
               </p>
             </div>
-            <div className="grid gap-0 border-t border-line">
+
+            <div
+              className={`journey-preview ${
+                activeJourneyPreview ? 'is-visible' : ''
+              }`}
+              aria-hidden="true"
+            >
+              <AssetImage
+                alt=""
+                className="journey-preview-image"
+                fallback={
+                  <div className="flex h-full w-full items-center justify-center bg-ivory-100/45 px-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-500">
+                    {activeJourneyPreview?.fallback ?? 'Preview pending'}
+                  </div>
+                }
+                src={activeJourneyPreview?.preview ?? '/images/parcours/placeholder.jpg'}
+              />
+            </div>
+
+            <div
+              className="journey-grid mt-14 grid border-t border-line min-[1000px]:grid-cols-4"
+              onMouseLeave={() => setActiveJourneyIndex(null)}
+            >
               {profile.chapters.map((chapter, index) => {
-                const ChapterVisual = chapterVisuals[index] ?? ProductSketchVisual;
+                const gallery = journeyGalleries[index];
 
                 return (
                   <article
                     key={chapter.number}
-                    className="grid gap-6 border-b border-line py-8 md:grid-cols-[7rem_minmax(0,1fr)_minmax(10rem,15rem)] xl:grid-cols-[7rem_minmax(0,1fr)_minmax(10rem,14rem)_13rem]"
+                    className="journey-card relative border-b border-line py-8 min-[1000px]:min-h-[22.5rem] min-[1000px]:border-b-0 min-[1000px]:border-r min-[1000px]:px-7 min-[1000px]:last:border-r-0"
+                    data-gallery={gallery.id}
                   >
-                    <span className="font-display text-6xl font-medium leading-none text-brand-700">
+                    <span className="journey-number block font-display text-6xl font-medium leading-none text-brand-700 min-[1000px]:mb-12 min-[1000px]:text-[clamp(3.25rem,5vw,4.5rem)]">
                       {chapter.number}
                     </span>
-                    <div>
-                      <h3 className="font-display text-3xl font-medium leading-tight text-ink-950 sm:text-4xl">
-                        <TitleWithSupport
-                          className="block"
-                          primary={displayProfile.chapters[index].title}
-                          support={isKorean ? chapter.title : undefined}
-                          supportClassName="text-sm sm:text-base"
-                        />
-                      </h3>
-                      <div className="mt-5 space-y-2 text-base leading-7 text-ink-700">
-                        {chapter.lines.map((line) => (
-                          <p key={line}>{line}</p>
-                        ))}
-                      </div>
+                    <button
+                      aria-label={`Preview ${chapter.company}`}
+                      className="journey-company mt-8 inline-block border-0 bg-transparent p-0 text-left text-xs font-bold uppercase tracking-[0.22em] text-brand-700 transition-colors hover:text-ink-950 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand-700 min-[1000px]:mt-0"
+                      data-preview={gallery.preview}
+                      onBlur={() => setActiveJourneyIndex(null)}
+                      onFocus={() => setActiveJourneyIndex(index)}
+                      onMouseEnter={() => setActiveJourneyIndex(index)}
+                      type="button"
+                    >
+                      {chapter.company}
+                    </button>
+                    <h3 className="mt-6 font-display text-3xl font-medium leading-[1.05] text-ink-950 min-[1000px]:text-[clamp(1.7rem,2.6vw,2.35rem)]">
+                      <TitleWithSupport
+                        className="block"
+                        primary={displayProfile.chapters[index].title}
+                        support={isKorean ? chapter.title : undefined}
+                        supportClassName="text-sm sm:text-base"
+                      />
+                    </h3>
+                    <div className="mt-5 space-y-2 text-sm leading-6 text-ink-700 sm:text-base sm:leading-7">
+                      {chapter.lines.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
                     </div>
-                    <div className="md:text-right">
-                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-500">
-                        {chapter.company}
-                      </p>
-                      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 md:justify-end">
-                        {chapter.logos.map((logo) => (
-                          <LogoImage key={logo.src} logo={logo} />
-                        ))}
-                      </div>
-                    </div>
-                    <ChapterVisual
-                      className="h-40 md:col-span-3 xl:col-span-1"
-                      destinationLabel={profile.mapVisual.destination}
-                      marker={chapter.number}
-                      originLabel={profile.mapVisual.origin}
-                    />
                   </article>
                 );
               })}
